@@ -1,89 +1,32 @@
-import React, { Component } from "react";
-import { TextInput, View, StyleSheet, Text } from "react-native";
+import React from "react";
+import { TextInput, View, StyleSheet } from "react-native";
 import Slider from 'react-native-slider'
-import { theme,config } from '../constants'
+import { theme, config } from '../constants'
+
+const SliderComp = (props) => {
 
 
-class SliderComp extends Component {
-    state = {
-        investment: 500,
-        period:2,
-        return:6
-    }
-    render() {
-        return (
-            <View>
-                <View>
-                    <View style={styles.measure}>
-                        <Text style={styles.caption}> Monthly Investment</Text>
-                        <Text>Rs. {this.state.investment.toFixed(0)}</Text>
-                    </View>
+    return (
+        <View>
 
+            <Slider
+                minimumValue={props.min}
+                maximumValue={props.max}
+                style={{ height: 19 }}
+                thumbStyle={styles.thumb}
+                trackStyle={{ height: 6, borderRadius: 6 }}
+                minimumTrackTintColor={theme.colors.secondary}
+                maximumTrackTintColor="rgb(84, 234, 200)"
+                value={props.value}
+                marginRight={theme.sizes.base}
+                marginLeft={theme.sizes.base}
+                marginTop={theme.sizes.base * 0.25}
+                onValueChange={value => props.onChange(value)}
+            />
 
-                    <Slider
-                        minimumValue={config.sliderMeasures.minInvestment}
-                        maximumValue={config.sliderMeasures.maxInvestment}
-                        style={{ height: 19 }}
-                        thumbStyle={styles.thumb}
-                        trackStyle={{ height: 6, borderRadius: 6 }}
-                        minimumTrackTintColor={theme.colors.secondary}
-                        maximumTrackTintColor="rgb(84, 234, 200)"
-                        value={this.state.investment}
-                        marginRight={theme.sizes.base}
-                        marginLeft={theme.sizes.base}
-                        marginTop={theme.sizes.base * 0.25}
-                        onValueChange={value => this.setState({ investment: value })}
-                    />
-                </View>
-                <View>
-                    <View style={styles.measure}>
-                        <Text style={styles.caption}> Investment Period</Text>
-                        <Text>{this.state.period.toFixed(0)} years</Text>
-                    </View>
-
-
-                    <Slider
-                        minimumValue={config.sliderMeasures.minPeriod}
-                        maximumValue={config.sliderMeasures.maxPeriod}
-                        style={{ height: 19 }}
-                        thumbStyle={styles.thumb}
-                        trackStyle={{ height: 6, borderRadius: 6 }}
-                        minimumTrackTintColor={theme.colors.secondary}
-                        maximumTrackTintColor="rgb(84, 234, 200)"
-                        value={this.state.period}
-                        marginRight={theme.sizes.base}
-                        marginLeft={theme.sizes.base}
-                        marginTop={theme.sizes.base * 0.25}
-                        onValueChange={value => this.setState({ period: value })}
-                    />
-                </View>
-                <View>
-                    <View style={styles.measure}>
-                        <Text style={styles.caption}> Expected Returns (annual)</Text>
-                        <Text>{this.state.return.toFixed(0)}%</Text>
-                    </View>
-
-
-                    <Slider
-                        minimumValue={config.sliderMeasures.minReturn}
-                        maximumValue={config.sliderMeasures.maxReturn}
-                        style={{ height: 19 }}
-                        thumbStyle={styles.thumb}
-                        trackStyle={{ height: 6, borderRadius: 6 }}
-                        minimumTrackTintColor={theme.colors.secondary}
-                        maximumTrackTintColor="rgb(84, 234, 200)"
-                        value={this.state.return}
-                        marginRight={theme.sizes.base}
-                        marginLeft={theme.sizes.base}
-                        marginTop={theme.sizes.base * 0.25}
-                        onValueChange={value => this.setState({ return: value })}
-                    />
-                </View>
-            </View>
-        )
-    }
-
-}
+        </View>
+    );
+};
 
 const styles = StyleSheet.create({
     thumb: {
@@ -94,22 +37,7 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         backgroundColor: theme.colors.tertiary
 
-    },
-    caption: {
-        marginBottom: 10,
-        fontWeight: 'bold',
-        fontSize: theme.sizes.font
-    },
-    value: {
-
-    },
-    measure: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginRight: theme.sizes.base,
-        marginLeft: theme.sizes.base,
-        marginTop: theme.sizes.base
     }
 
 });
-export default SliderComp;
+export { SliderComp };
