@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Dimensions, SafeAreaView, ScrollView } from "react-native";
 import { SliderComp } from "../components/slider";
 import { theme, config } from "../constants";
 import { SliderLabel } from "../components/SliderLabel";
+import { PieChart } from "../components/chart";
 
 const { width } = Dimensions.get("window")
 
 class Emi extends Component {
   state = {
-    investment: 500,
+    investment: 10,
     period: 2,
     returns: 6,
     active: 'SIP'
@@ -21,7 +22,7 @@ class Emi extends Component {
     this.setState({ period });
   }
   setReturn = (returns) => {
-    this.setState({ returns }), 'Wealth', 'Lumpsum', 'EMI', 'Insurance'
+    this.setState({ returns });
   }
   renderTab(tab) {
     const { active } = this.state
@@ -41,44 +42,56 @@ class Emi extends Component {
 
     this.setState({ active: tab })
   }
+
+
   render() {
     const tabs = ['SIP', 'SIP Delay', 'Wealth', 'Lumpsum', 'EMI', 'Insurance']
 
     return (
-      <View>
-        <View style={styles.tabs}>
-          {tabs.map(tab => this.renderTab(tab))}
-        </View>
-        <View>
-          <SliderLabel
-            value={"Rs. " + this.state.investment.toFixed(0)}
-            label="Monthly Investment">
-          </SliderLabel>
-          <SliderComp
-            min={config.sliderMeasures.minInvestment}
-            max={config.sliderMeasures.maxInvestment}
-            value={this.state.investment} onChange={this.setInvestment}>
-          </SliderComp>
-          <SliderLabel
-            value={this.state.period.toFixed(0) + " years"}
-            label="Investment Period">
-          </SliderLabel>
-          <SliderComp
-            min={config.sliderMeasures.minPeriod}
-            max={config.sliderMeasures.maxPeriod}
-            value={this.state.period} onChange={this.setPeriod}>
-          </SliderComp>
-          <SliderLabel
-            value={this.state.returns.toFixed(0) + "%"}
-            label="Expected Returns (annual)">
-          </SliderLabel>
-          <SliderComp
-            min={config.sliderMeasures.minReturn}
-            max={config.sliderMeasures.maxReturn}
-            value={this.state.returns} onChange={this.setReturn}>
-          </SliderComp>
-        </View>
-      </View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <ScrollView>
+          <PieChart
+            active={this.state.active}
+            investment={this.state.investment}
+            period={this.state.period}
+            returns={this.state.returns}>
+
+          </PieChart>
+
+          <View style={styles.tabs}>
+            {tabs.map(tab => this.renderTab(tab))}
+          </View>
+          <View>
+            <SliderLabel
+              value={"Rs. " + this.state.investment.toFixed(0)}
+              label="Monthly Investment">
+            </SliderLabel>
+            <SliderComp
+              min={config.sliderMeasures.minInvestment}
+              max={config.sliderMeasures.maxInvestment}
+              value={this.state.investment} onChange={this.setInvestment}>
+            </SliderComp>
+            <SliderLabel
+              value={this.state.period.toFixed(0) + " years"}
+              label="Investment Period">
+            </SliderLabel>
+            <SliderComp
+              min={config.sliderMeasures.minPeriod}
+              max={config.sliderMeasures.maxPeriod}
+              value={this.state.period} onChange={this.setPeriod}>
+            </SliderComp>
+            <SliderLabel
+              value={this.state.returns.toFixed(0) + "%"}
+              label="Expected Returns (annual)">
+            </SliderLabel>
+            <SliderComp
+              min={config.sliderMeasures.minReturn}
+              max={config.sliderMeasures.maxReturn}
+              value={this.state.returns} onChange={this.setReturn}>
+            </SliderComp>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 };
