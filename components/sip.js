@@ -4,11 +4,30 @@ import Slider from 'react-native-slider'
 import { theme, config } from '../constants'
 import { SliderLabel } from "./SliderLabel";
 import { SliderComp } from "./slider";
+import Accordian from "./accordian";
+import data from "../data/sip.json"
+
+renderAccordians=()=> {
+
+    const items = [];
+    data.map(item=>{
+        items.push(
+            <Accordian
+            title = {item.title}
+            data = {item.data}
+        />
+        )
+    })
+    
+   
+return items
+}
 
 const Sip = (props) => {
 
 
     return (
+        <View>
         <View>
             <SliderLabel
               value={props.investment.toFixed(0)}
@@ -46,6 +65,8 @@ const Sip = (props) => {
               max={config.sliderMeasures.maxReturn}
               value={props.returns} onChange={props.setReturn}>
             </SliderComp>
+          </View>
+          { renderAccordians() }
           </View>
     );
 };
