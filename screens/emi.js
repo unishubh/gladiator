@@ -1,18 +1,27 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, Dimensions, SafeAreaView, ScrollView } from "react-native";
-import { SliderComp } from "../components/slider";
-import { theme, config } from "../constants";
-import { SliderLabel } from "../components/SliderLabel";
-import { PieChart } from "../components/chart";
+import {  StyleSheet,  SafeAreaView, ScrollView } from "react-native";
 
-const { width } = Dimensions.get("window")
+import { PieChart } from "../components/chart";
+import { calculateResult } from "../calculations/sip";
+import { Sip } from "../components/sip";
+import { SipDelay } from "../components/sipDelay";
+import { Wealth } from "../components/wealth";
+import { Lumpsum } from "../components/lumpsum";
+import { Emicalc } from "../components/emi";
+import { Insurance } from "../components/insurance";
+import { Tabcomponent } from "../components/tabs";
+
 
 class Emi extends Component {
   state = {
     investment: 10,
     period: 2,
     returns: 6,
-    active: 'SIP'
+    active: 'SIP',
+    delay:2,
+    age:40,
+    expense:10,
+    retirementAge:60
   }
   setInvestment = (investment) => {
     this.setState({ investment });
@@ -21,75 +30,151 @@ class Emi extends Component {
   setPeriod = (period) => {
     this.setState({ period });
   }
+  setDelay=(delay)=>{
+    this.setState({delay});
+  }
   setReturn = (returns) => {
     this.setState({ returns });
   }
-  renderTab(tab) {
-    const { active } = this.state
-    const isActive = active === tab
-    return (
-      <TouchableOpacity
-        key={`tab-${tab}`}
-        onPress={() => this.handleTab(tab)}
-        style={[styles.tab,
-        isActive ? styles.active : null]}>
-
-        <Text style={styles.tabText}>{tab}</Text>
-      </TouchableOpacity>
-    )
+  setAge=(age)=>{
+    this.setState({age});
   }
-  handleTab = tab => {
-
-    this.setState({ active: tab })
+  setRetirementAge=(retirementAge)=>{
+    this.setState({retirementAge});
+  }
+  setExpense=(expense)=>{
+    this.setExpense({expense});
+  }
+  setActive=(active)=>{
+    this.setState({active});
   }
 
+
+calculateResult(){
+    let activeTab = this.state.active
+    let result = 0
+
+    let graphicData = [
+        { x: 'Gain', y: 0 },
+        { x: 'Invested', y: 0 }
+
+    ]
+    switch (activeTab) {
+        case "SIP":
+
+            result = calculateResult((this.state.investment).toFixed(0), 12, (this.state.returns).toFixed(0), (this.state.period).toFixed(0));
+            graphicData[0]['y'] = result - this.state.investment
+            graphicData[1]['y'] = this.state.investment
+            return graphicData
+           
+            break;
+
+    }
+}
+
+
+renderScreen(){
+  let activeTab = this.state.active
+  switch (activeTab) {
+    case "SIP":
+      return (
+        <Sip
+          investment={this.state.investment}
+          period={this.state.period}
+          returns={this.state.returns}
+          setInvestment={this.setInvestment}
+          setPeriod={this.setPeriod}
+          setReturn={this.setReturn}>
+        
+        </Sip>
+      )
+      break;
+    case "SIP Delay":
+      return (
+        <SipDelay
+          investment={this.state.investment}
+          period={this.state.period}
+          returns={this.state.returns}
+          delay={this.state.delay}
+          setInvestment={this.setInvestment}
+          setPeriod={this.setPeriod}
+          setReturn={this.setReturn}
+          setDelay={this.setDelay}>
+        
+        </SipDelay>
+      )
+      break;
+      case "Wealth":
+        return (
+          <Wealth
+          investment={this.state.investment}
+          period={this.state.period}
+          returns={this.state.returns}
+          setInvestment={this.setInvestment}
+          setPeriod={this.setPeriod}
+          setReturn={this.setReturn}>
+        
+        </Wealth>
+        )
+        break;
+      case "Lumpsum":
+        return (
+          <Lumpsum
+            investment={this.state.investment}
+            period={this.state.period}
+            returns={this.state.returns}
+            setInvestment={this.setInvestment}
+            setPeriod={this.setPeriod}
+            setReturn={this.setReturn}>
+          
+          </Lumpsum>
+        )
+      case "EMI":
+        return (
+          <Emicalc
+          investment={this.state.investment}
+          period={this.state.period}
+          returns={this.state.returns}
+          setInvestment={this.setInvestment}
+          setPeriod={this.setPeriod}
+          setReturn={this.setReturn}>
+
+          </Emicalc>
+        )
+        break;
+        case "Insurance":
+          return (
+            <Insurance
+              expense={this.state.expense}
+              age={this.state.age}
+              retirementAge={this.state.retirementAge}
+              setExpense={this.setExpense}
+              setAge={this.setAge}
+              setRetirementAge={this.setRetirementAge}>
+            
+            </Insurance>
+          )
+  }
+  
+}
 
   render() {
-    const tabs = ['SIP', 'SIP Delay', 'Wealth', 'Lumpsum', 'EMI', 'Insurance']
-
+   const graphicData=this.calculateResult();
     return (
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView>
           <PieChart
-            active={this.state.active}
-            investment={this.state.investment}
-            period={this.state.period}
-            returns={this.state.returns}>
+            graphicData={graphicData}>
 
           </PieChart>
 
-          <View style={styles.tabs}>
-            {tabs.map(tab => this.renderTab(tab))}
-          </View>
-          <View>
-            <SliderLabel
-              value={"Rs. " + this.state.investment.toFixed(0)}
-              label="Monthly Investment">
-            </SliderLabel>
-            <SliderComp
-              min={config.sliderMeasures.minInvestment}
-              max={config.sliderMeasures.maxInvestment}
-              value={this.state.investment} onChange={this.setInvestment}>
-            </SliderComp>
-            <SliderLabel
-              value={this.state.period.toFixed(0) + " years"}
-              label="Investment Period">
-            </SliderLabel>
-            <SliderComp
-              min={config.sliderMeasures.minPeriod}
-              max={config.sliderMeasures.maxPeriod}
-              value={this.state.period} onChange={this.setPeriod}>
-            </SliderComp>
-            <SliderLabel
-              value={this.state.returns.toFixed(0) + "%"}
-              label="Expected Returns (annual)">
-            </SliderLabel>
-            <SliderComp
-              min={config.sliderMeasures.minReturn}
-              max={config.sliderMeasures.maxReturn}
-              value={this.state.returns} onChange={this.setReturn}>
-            </SliderComp>
-          </View>
+          <Tabcomponent
+            active={this.state.active}
+            onChange={this.setActive}>
+
+          </Tabcomponent>
+          {this.renderScreen()}
+          
         </ScrollView>
       </SafeAreaView>
     );
@@ -97,33 +182,7 @@ class Emi extends Component {
 };
 
 const styles = StyleSheet.create({
-  tabs: {
-    marginTop: theme.sizes.base,
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: theme.colors.tertiary,
-    justifyContent: "space-between",
-    height: theme.sizes.base * 3,
-  },
-  active: {
-
-    borderColor: "white",
-    borderWidth: 2,
-    backgroundColor: theme.colors.secondary,
-  },
-  tab: {
-    height: theme.sizes.base * 3,
-    justifyContent: "center",
-    alignItems: "center",
-    width: width / 6,
-    fontSize: 2,
-    padding: theme.sizes.base * 0.05
-  },
-  tabText: {
-    color: "white",
-    fontSize: theme.sizes.font - 2,
-
-  }
+ 
 })
 
 export default Emi;
