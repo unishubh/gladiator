@@ -17,40 +17,20 @@ const numberFormat = (value) =>
 
 
 const PieChart = (props) => {
-    let activeTab = props.active
-    let result = 0
 
-    let graphicData = [
-        { x: 'Gain', y: 0 },
-        { x: 'Invested', y: 0 }
-
-    ]
-    switch (activeTab) {
-        case "SIP":
-
-            result = calculateResult((props.investment).toFixed(0), 12, (props.returns).toFixed(0), (props.period).toFixed(0));
-            graphicData[0]['y'] = result - props.investment
-            graphicData[1]['y'] = props.investment
-
-            console.log((props.returns).toFixed(0))
-
-            console.log(result)
-            break;
-
-    }
 
     return (
         <View style={{ alignSelf: 'center' }}>
 
-            <Svg width={300} height={300}>
+            <Svg width={350} height={300}>
                 <VictoryPie
 
-                    data={graphicData}
+                    data={props.graphicData}
                     colorScale={[theme.colors.secondary, theme.colors.tertiary]}
                     animate={{
                         duration: 2000
                     }}
-                    width={300}
+                    width={350}
                     height={300}
                     innerRadius={60}
 
@@ -64,8 +44,8 @@ const PieChart = (props) => {
                 <VictoryLabel
                     textAnchor="middle"
                     style={{ fontSize: 14, fontWeight: "bold" }}
-                    x={150} y={150}
-                    text={`Total : ${numberFormat((result).toFixed(0))}`}
+                    x={175} y={150}
+                    text={`Total : ${numberFormat((23400).toFixed(0))}`}
                 />
             </Svg>
 
