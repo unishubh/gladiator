@@ -13,13 +13,14 @@ renderAccordians=()=> {
     data.map(item=>{
         items.push(
             <Accordian
+                key = {item.title}
             title = {item.title}
             data = {item.data}
         />
         )
     })
-    
-   
+
+
 return items
 }
 
@@ -37,6 +38,7 @@ const Sip = (props) => {
               max={config.sliderMeasures.maxInvestment}>
             </SliderLabel>
             <SliderComp
+                step={config.sliderMeasures.amountStep}
               min={config.sliderMeasures.minInvestment}
               max={config.sliderMeasures.maxInvestment}
               value={props.investment} onChange={props.setInvestment}>
@@ -49,6 +51,7 @@ const Sip = (props) => {
               max={config.sliderMeasures.maxPeriod}>
             </SliderLabel>
             <SliderComp
+                step={config.sliderMeasures.timeStep}
               min={config.sliderMeasures.minPeriod}
               max={config.sliderMeasures.maxPeriod}
               value={props.period} onChange={props.setPeriod}>
@@ -61,6 +64,7 @@ const Sip = (props) => {
               max={config.sliderMeasures.maxReturn}>
             </SliderLabel>
             <SliderComp
+                step={config.sliderMeasures.roiStep}
               min={config.sliderMeasures.minReturn}
               max={config.sliderMeasures.maxReturn}
               value={props.returns} onChange={props.setReturn}>

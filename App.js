@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
-import Emi from "./screens/emi";
+import Calculator from "./screens/calculator";
 import { NavigationContainer } from "@react-navigation/native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import * as eva from "@eva-design/eva";
@@ -33,7 +33,7 @@ class App extends Component {
       <HomeStack.Navigator>
         <HomeStack.Screen
           name="EMI Calculator"
-          component={Emi}
+          component={Calculator}
           headerTitle="EMI Calculator"
         />
       </HomeStack.Navigator>
@@ -70,7 +70,7 @@ class App extends Component {
               name="EMI"
               component={this.EMIStack}
               options={{
-                tabBarLabel: "Emi",
+                tabBarLabel: "Calculator",
                 title: "EMI Calculator",
 
                 tabBarIcon: ({ color, size }) => (

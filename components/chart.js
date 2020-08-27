@@ -28,7 +28,7 @@ const PieChart = (props) => {
                     data={props.graphicData}
                     colorScale={[theme.colors.secondary, theme.colors.tertiary]}
                     animate={{
-                        duration: 2000
+                        duration: 500
                     }}
                     width={350}
                     height={300}
@@ -45,7 +45,7 @@ const PieChart = (props) => {
                     textAnchor="middle"
                     style={{ fontSize: 14, fontWeight: "bold" }}
                     x={175} y={150}
-                    text={`Total : ${numberFormat((23400).toFixed(0))}`}
+                    text={`Total : ${numberFormat((1234).toFixed(0))}`}
                 />
             </Svg>
 
