@@ -3,7 +3,13 @@ import { StyleSheet, SafeAreaView, ScrollView, Text, View } from "react-native";
 import { theme } from "../constants";
 
 import { PieChart } from "../components/chart";
-import { calculateResult } from "../calculations/sip";
+import {
+  calculateResult,
+  calculateEmi,
+  calculateLumpSum,
+  calculateWealth,
+  calculateInsurance,
+} from "../calculations/sip";
 import { Sip } from "../components/sip";
 import { SipDelay } from "../components/sipDelay";
 import { Wealth } from "../components/wealth";
@@ -11,6 +17,7 @@ import { Lumpsum } from "../components/lumpsum";
 import { Emicalc } from "../components/emi";
 import { Insurance } from "../components/insurance";
 import { Tabcomponent } from "../components/tabs";
+import { BarChart } from "../components/barChart";
 
 class Calculator extends Component {
   state = {
@@ -53,12 +60,12 @@ class Calculator extends Component {
     let activeTab = this.state.active;
     let result = 0;
 
-    let graphicData = [
-      { x: "Gain", y: 0 },
-      { x: "Invested", y: 0 },
-    ];
     switch (activeTab) {
       case "SIP":
+        let graphicData = [
+          { x: "Gain", y: 0 },
+          { x: "Invested", y: 0 },
+        ];
         result = calculateResult(
           this.state.investment.toFixed(0),
           12,
@@ -76,6 +83,78 @@ class Calculator extends Component {
         return graphicData;
 
         break;
+
+      case "EMI": {
+        let graphicData = [
+          { x: "Interest Paid", y: 0 },
+          { x: "Loan Amount", y: 0 },
+        ];
+        result = calculateEmi(
+          this.state.investment.toFixed(0),
+          this.state.returns.toFixed(0),
+          this.state.period.toFixed(0)
+        );
+        graphicData[0]["y"] = result * 12 * this.state.period;
+        graphicData[1]["y"] = this.state.investment;
+        console.log(result);
+        return graphicData;
+      }
+
+      case "Lumpsum": {
+        let graphicData = [
+          { x: "Gain", y: 0 },
+          { x: "Invested", y: 0 },
+        ];
+
+        result = calculateLumpSum(
+          this.state.investment,
+          this.state.returns,
+          this.state.period
+        );
+        graphicData[0]["y"] = result - this.state.investment;
+        graphicData[1]["y"] = this.state.investment;
+
+        return graphicData;
+      }
+
+      case "Wealth": {
+        let graphicData = [
+          { x: "Gain", y: 0 },
+          { x: "Invested", y: 0 },
+        ];
+
+        result = calculateWealth(
+          this.state.investment,
+          12,
+          this.state.returns,
+          this.state.period
+        );
+        graphicData[0]["y"] = result * 12 * this.state.period;
+        graphicData[1]["y"] =
+          this.state.investment - result * 12 * this.state.period;
+        console.log(result);
+        return graphicData;
+      }
+
+      case "Insurance": {
+        let graphicData = [
+          { x: "Nominal", y: 0 },
+          { x: "Inflated", y: 0 },
+        ];
+
+        result = calculateInsurance(
+          this.state.investment,
+          this.state.age,
+          this.state.retirementAge
+        );
+
+        graphicData[0]["y"] =
+          result * 12 * (this.state.retirementAge - this.state.age);
+        graphicData[1]["y"] = result;
+
+        console.log(result);
+        return graphicData;
+      }
     }
   }
 
@@ -169,12 +248,6 @@ class Calculator extends Component {
             onChange={this.setActive}
           ></Tabcomponent>
           {this.renderScreen()}
-
-          <View>
-            <Text style={styles.title}>
-              Value of your investment in next 30 years
-            </Text>
-          </View>
         </ScrollView>
       </SafeAreaView>
     );
