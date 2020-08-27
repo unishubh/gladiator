@@ -1,13 +1,9 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
 import { theme, config } from "../constants";
 import { VictoryPie, VictoryLabel } from "victory-native";
-import Svg from "react-native-svg";
 import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Slider from "react-native-slider";
-import { theme, config } from "../constants";
 import { calculateResult } from "../calculations/sip";
-import { VictoryPie, VictoryLabel, VictoryLegend } from "victory-native";
 import Svg from "react-native-svg";
 const { width } = Dimensions.get("window");
 
@@ -68,10 +64,7 @@ renderTable(tableData){
 }
 */
 const PieChart = (props) => {
-  return (
-    <View
-      style={{
-        flex: 1,
+
 
 
     return (
@@ -92,13 +85,13 @@ const PieChart = (props) => {
                     height={300}
                     innerRadius={50}
                     radius={90}
-                    labels={datum=>`${datum.x}\n \u20b9 ${approximate((datum.y).toFixed(0))}`}
+                    labels={({datum})=>`${datum.x}\n \u20b9 ${approximate((datum.y).toFixed(0))}`}
                     
 
                     
                     style={{
                         labels: {
-                            fill: 'black', fontSize: 14, padding:15, fontWeight: 'bold'
+                            fill: 'black', fontSize: 12, padding:15, fontWeight: 'bold'
                         }, parent: { overflow: "visible" }
                        
                     }}
@@ -107,7 +100,7 @@ const PieChart = (props) => {
                     textAnchor="middle"
                     style={{ fontSize: 12, fontWeight: "bold" }}
                     x={width/2} y={150}
-                    text={`Total \n \u20B9 ${approximate((23400).toFixed(0))}`}
+                    text={`Total \n \u20B9 ${approximate((props.graphicData[0]["y"]+props.graphicData[1]["y"]).toFixed(0))}`}
                 />
                 </Svg>
                 
