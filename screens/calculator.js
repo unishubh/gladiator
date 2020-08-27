@@ -43,7 +43,7 @@ class Calculator extends Component {
     this.setState({ retirementAge });
   };
   setExpense = (expense) => {
-    this.setExpense({ expense });
+    this.setState({ expense });
   };
   setActive = (active) => {
     this.setState({ active });
