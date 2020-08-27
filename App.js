@@ -11,11 +11,8 @@ import Sip from "./screens/sip";
 import { ApplicationProvider } from "@ui-kitten/components";
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
-class App extends Component {
-  constructor() {
-    super();
-  }
 
+/*
   SipStack() {
     return (
       <HomeStack.Navigator>
@@ -39,6 +36,8 @@ class App extends Component {
       </HomeStack.Navigator>
     );
   }
+
+
 
   render() {
     return (
@@ -102,8 +101,26 @@ class App extends Component {
     );
   }
 }
+*/  
 
-export default App;
+
+
+function Home(){
+  return (
+    <HomeStack.Navigator
+      screenOptions={{headerShown:false}}>
+      <HomeStack.Screen name="Calculator" component={Calculator}/>
+      </HomeStack.Navigator>
+  )
+}
+
+export default function App(){
+  return (
+    <NavigationContainer>
+      <Home/>
+      </NavigationContainer>
+  )
+}
 // /export default function App() {
 //   return (
 //     <View style={styles.container}>
