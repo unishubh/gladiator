@@ -30,6 +30,21 @@ const numberFormat = (value) =>
     currency: "INR",
   }).format(value);
 
+    const approximate = (value) =>  {
+        if (value <= 1000) {
+            return Math.round(value)
+        }
+        if (value >= 1000 && value < 100000) {
+            return Math.round((value / 1000) * 100) / 100 + "K"
+        }
+        else if (value >= 100000 && value < 10000000) {
+            return Math.round((value / 100000) * 100) / 100 + " L"
+        }
+        else if (value >= 10000000) {
+            return Math.round((value / 10000000) * 100) / 100 + " Cr"
+        }
+    }
+
 /*
 renderTable(tableData){
     return (
@@ -58,54 +73,51 @@ const PieChart = (props) => {
       style={{
         flex: 1,
 
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <VictoryPie
-        data={props.graphicData}
-        colorScale={[theme.colors.secondary, theme.colors.tertiary]}
-        animate={{
-          duration: 500,
-        }}
-        width={width}
-        height={250}
-        innerRadius={60}
-        radius={50}
-        labels={({ datum }) =>
-          `${datum.x}\n ${numberFormat(datum.y.toFixed(0))}`
-        }
-        style={{
-          labels: {
-            fill: "black",
-            fontSize: 12,
-            padding: 30,
-            fontWeight: "bold",
-          },
-          parent: { overflow: "visible" },
-        }}
-      />
-      <VictoryLabel
-        textAnchor="middle"
-        style={{ fontSize: 14, fontWeight: "bold" }}
-        x={width / 4}
-        y={150}
-        text={`Total : ${numberFormat((23400).toFixed(0))}`}
-      />
-      <Text
-        style={{
-          fontSize: 12,
-          fontWeight: "bold",
-          borderColor: theme.colors.tertiary,
-          borderWidth: 3,
-          padding: 10,
-          borderRadius: 3,
-        }}
-      >
-        {`Total : ${numberFormat((23400).toFixed(0))}`}
-      </Text>
-    </View>
-  );
+
+    return (
+        <View style={{ flex: 1,
+          
+            justifyContent: 'center',
+            alignItems: 'center', marginTop:30}}>
+
+                <Svg width={width} height={300}>
+                <VictoryPie
+                   
+                    data={props.graphicData}
+                    colorScale={[theme.colors.secondary, theme.colors.tertiary]}
+                    animate={{
+                        duration: 500
+                    }}
+                    width={width}
+                    height={300}
+                    innerRadius={50}
+                    radius={90}
+                    labels={datum=>`${datum.x}\n \u20b9 ${approximate((datum.y).toFixed(0))}`}
+                    
+
+                    
+                    style={{
+                        labels: {
+                            fill: 'black', fontSize: 14, padding:15, fontWeight: 'bold'
+                        }, parent: { overflow: "visible" }
+                       
+                    }}
+                />
+                <VictoryLabel
+                    textAnchor="middle"
+                    style={{ fontSize: 12, fontWeight: "bold" }}
+                    x={width/2} y={150}
+                    text={`Total \n \u20B9 ${approximate((23400).toFixed(0))}`}
+                />
+                </Svg>
+                
+
+
+
+               
+            
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({

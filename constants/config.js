@@ -1,5 +1,5 @@
 const sliderMeasures={
-    minInvestment:0,
+    minInvestment:1,
     maxInvestment:200000,
     minPeriod:1,
     maxPeriod:100,
