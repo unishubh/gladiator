@@ -239,8 +239,9 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView>
+      <View style={{flex:1, }}> 
+        <ScrollView style={{flex:1}}>
+          <View style={{paddingBottom:10,}}>
           <PieChart graphicData={resultData}></PieChart>
 
           <Tabcomponent
@@ -248,8 +249,9 @@ class Calculator extends Component {
             onChange={this.setActive}
           ></Tabcomponent>
           {this.renderScreen()}
+          </View>
         </ScrollView>
-      </SafeAreaView>
+      </View> 
     );
   }
 }
