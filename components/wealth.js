@@ -10,7 +10,7 @@ const Wealth = (props) => {
     <View>
       <SliderLabel
         value={props.investment.toFixed(0)}
-        label="Monthly Investment"
+        label="Wealth Desired"
         caption="Rs."
         max={config.sliderMeasures.maxInvestment}
         onChange={props.setInvestment}
