@@ -4,7 +4,7 @@ import Slider from 'react-native-slider'
 import { theme, config } from '../constants'
 import { SliderLabel } from "./SliderLabel";
 import { SliderComp } from "./slider";
-const { width } = Dimensions.get("window")
+const { width,height } = Dimensions.get("window")
 
 renderTab=(tab,props)=> {
    
@@ -38,7 +38,7 @@ const Tabcomponent = (props) => {
 const styles = StyleSheet.create({
 
     tabs: {
-        marginTop: theme.sizes.base/4,
+        marginTop: theme.sizes.base*4,
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: theme.colors.tertiary,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
       },
       tabText: {
         color: "white",
-        fontSize: theme.sizes.font - 2,
+        fontSize: theme.sizes.font - 4,
     
       }
 });

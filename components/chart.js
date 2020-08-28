@@ -5,7 +5,7 @@ import { Text, View, StyleSheet, Dimensions } from "react-native";
 import Slider from "react-native-slider";
 import { calculateResult } from "../calculations/sip";
 import Svg from "react-native-svg";
-const { width } = Dimensions.get("window");
+const { width,height } = Dimensions.get("window");
 
 import {
   Table,
@@ -71,7 +71,7 @@ const PieChart = (props) => {
         <View style={{ flex: 1,
           
             justifyContent: 'center',
-            alignItems: 'center', marginTop:30}}>
+            alignItems: 'center',marginTop:-height/6}}>
 
                 <Svg width={width} height={300}>
                 <VictoryPie

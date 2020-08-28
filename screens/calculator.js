@@ -18,6 +18,7 @@ import { Emicalc } from "../components/emi";
 import { Insurance } from "../components/insurance";
 import { Tabcomponent } from "../components/tabs";
 import { BarChart } from "../components/barChart";
+import { Header } from "../components/header";
 
 class Calculator extends Component {
   state = {
@@ -239,15 +240,17 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
-      <View style={{flex:1, }}> 
-        <ScrollView style={{flex:1}}>
-          <View style={{paddingBottom:10,}}>
-          <PieChart graphicData={resultData}></PieChart>
+      <View style={{flex:1,backgroundColor:'white' }}> 
+      <Header text={this.state.active}></Header>
+      <PieChart graphicData={resultData}></PieChart>
 
-          <Tabcomponent
-            active={this.state.active}
-            onChange={this.setActive}
-          ></Tabcomponent>
+<Tabcomponent
+  active={this.state.active}
+  onChange={this.setActive}
+></Tabcomponent>
+        <ScrollView style={{flex:1}}>
+          <View style={{paddingBottom:40,paddingTop:10}}>
+          
           {this.renderScreen()}
           </View>
         </ScrollView>
