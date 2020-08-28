@@ -25,7 +25,7 @@ const SliderLabel = (props) => {
             
             
             onChangeText={ text=>{
-                var num = isNaN(parseInt(text)) ? 0 : parseInt(text);
+                var num = isNaN(parseInt(text)) ? 1: parseInt(text);
                 num=num>=props.max?props.max:num;
                 props.onChange(parseInt(num))}}/>
         {props.caption!="Rs."?<Text style={{marginTop:5}}>{props.caption} </Text>:null}
