@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         color:theme.colors.tertiary,
         fontWeight:'bold',
         fontSize:theme.sizes.font*2,
-        marginTop:-height/5
+        marginTop:-height/10
     }
 });
 export { Header };

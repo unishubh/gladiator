@@ -242,7 +242,7 @@ class Calculator extends Component {
     return (
       <View style={{flex:1,backgroundColor:'white' }}> 
       <Header text={this.state.active}></Header>
-      <PieChart graphicData={resultData}></PieChart>
+      <PieChart graphicData={resultData} active={this.state.active}></PieChart>
 
 <Tabcomponent
   active={this.state.active}
