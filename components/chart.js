@@ -71,7 +71,7 @@ const PieChart = (props) => {
         <View style={{ flex: 1,
           
             justifyContent: 'center',
-            alignItems: 'center',marginTop:-height/6}}>
+            alignItems: 'center',marginTop:-height/10}}>
 
                 <Svg width={width} height={300}>
                 <VictoryPie
@@ -100,7 +100,7 @@ const PieChart = (props) => {
                     textAnchor="middle"
                     style={{ fontSize: 12, fontWeight: "bold" }}
                     x={width/2} y={150}
-                    text={`Total \n \u20B9 ${approximate((props.graphicData[0]["y"]+props.graphicData[1]["y"]).toFixed(0))}`}
+                    text={`${props.active==='EMI'?"Monthly EMI":"Total"} \n \u20B9 ${approximate((props.graphicData[0]["y"]+props.graphicData[1]["y"]).toFixed(0))}`}
                 />
                 </Svg>
                 
