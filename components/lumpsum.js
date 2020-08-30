@@ -11,7 +11,7 @@ const Lumpsum = (props) => {
       <SliderLabel
         value={props.investment.toFixed(0)}
         onChange={props.setInvestment}
-        label="Monthly Investment"
+        label="Total One Tme Investment"
         max={config.sliderMeasures.maxInvestment}
         caption="Rs."
       ></SliderLabel>

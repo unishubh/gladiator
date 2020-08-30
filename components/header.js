@@ -22,11 +22,11 @@ const Header = (props) => {
     top: 0,
     width: '100%',
     height: '100%'}}>
-        <Text style={styles.text}> {props.text} </Text>
+        <Text style={styles.text}> {props.text +" Calculator"}</Text>
       <Image
       source={require ('../assets/headerimage.png')}
       style={styles.image}/>
-         
+
     </View>
     </View>
   );
@@ -36,10 +36,10 @@ const styles = StyleSheet.create({
     image:{
         width:width/2.5,
         height:90,
-       
-        
+
+
         resizeMode:'contain',
-       
+
     },
     banner:{
         width:width,

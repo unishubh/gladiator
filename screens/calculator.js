@@ -89,6 +89,7 @@ class Calculator extends Component {
         let graphicData = [
           { x: "Interest Paid", y: 0 },
           { x: "Loan Amount", y: 0 },
+          {result:0}
         ];
         result = calculateEmi(
           this.state.investment.toFixed(0),
@@ -97,6 +98,7 @@ class Calculator extends Component {
         );
         graphicData[0]["y"] = result * 12 * this.state.period;
         graphicData[1]["y"] = this.state.investment;
+        graphicData[2]["result"] = result;
         console.log(result);
         return graphicData;
       }
@@ -122,6 +124,7 @@ class Calculator extends Component {
         let graphicData = [
           { x: "Gain", y: 0 },
           { x: "Invested", y: 0 },
+          {result:0},
         ];
 
         result = calculateWealth(
@@ -133,6 +136,7 @@ class Calculator extends Component {
         graphicData[0]["y"] = result * 12 * this.state.period;
         graphicData[1]["y"] =
           this.state.investment - result * 12 * this.state.period;
+        graphicData[2]['result'] = result;
         console.log(result);
         return graphicData;
       }
@@ -240,7 +244,7 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
-      <View style={{flex:1,backgroundColor:'white' }}> 
+      <View style={{flex:1,backgroundColor:'white' }}>
       <Header text={this.state.active}></Header>
       <PieChart graphicData={resultData} active={this.state.active}></PieChart>
 
@@ -250,11 +254,11 @@ class Calculator extends Component {
 ></Tabcomponent>
         <ScrollView style={{flex:1}}>
           <View style={{paddingBottom:40,paddingTop:10}}>
-          
+
           {this.renderScreen()}
           </View>
         </ScrollView>
-      </View> 
+      </View>
     );
   }
 }

@@ -65,17 +65,25 @@ renderTable(tableData){
 */
 const PieChart = (props) => {
 
-
+let res = 0;
+let label = 'Total'
+if (props.active === 'EMI' || props.active ==='Wealth') {
+    label = 'Per Month'
+    res = props.graphicData[2]['result'];
+    props.graphicData.pop();
+} else {
+    res = props.graphicData[1]['y']+props.graphicData[0]['y'];
+}
 
     return (
         <View style={{ flex: 1,
-          
+
             justifyContent: 'center',
             alignItems: 'center',marginTop:-height/10}}>
 
                 <Svg width={width} height={300}>
                 <VictoryPie
-                   
+
                     data={props.graphicData}
                     colorScale={[theme.colors.secondary, theme.colors.tertiary]}
                     animate={{
@@ -86,29 +94,29 @@ const PieChart = (props) => {
                     innerRadius={50}
                     radius={90}
                     labels={({datum})=>`${datum.x}\n \u20b9 ${approximate((datum.y).toFixed(0))}`}
-                    
 
-                    
+
+
                     style={{
                         labels: {
                             fill: 'black', fontSize: 12, padding:15, fontWeight: 'bold'
                         }, parent: { overflow: "visible" }
-                       
+
                     }}
                 />
                 <VictoryLabel
                     textAnchor="middle"
                     style={{ fontSize: 12, fontWeight: "bold" }}
                     x={width/2} y={150}
-                    text={`${props.active==='EMI'?"Monthly EMI":"Total"} \n \u20B9 ${approximate((props.graphicData[0]["y"]+props.graphicData[1]["y"]).toFixed(0))}`}
+                    text={`${label} \n \u20B9 ${approximate((res).toFixed(0))}`}
                 />
                 </Svg>
-                
 
 
 
-               
-            
+
+
+
         </View>
     );
 };

@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
       },
       tabText: {
         color: "white",
-        fontSize: theme.sizes.font - 2,
+        fontSize: theme.sizes.font,
+          fontWeight:"bold",
 
       }
 });
