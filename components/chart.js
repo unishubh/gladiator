@@ -79,7 +79,7 @@ if (props.active === 'EMI' || props.active ==='Wealth') {
         <View style={{ flex: 1,
 
             justifyContent: 'center',
-            alignItems: 'center',marginTop:-height/10}}>
+            alignItems: 'center',marginTop:-height/15}}>
 
                 <Svg width={width} height={300}>
                 <VictoryPie

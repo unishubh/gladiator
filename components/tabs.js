@@ -38,7 +38,7 @@ const Tabcomponent = (props) => {
 const styles = StyleSheet.create({
 
     tabs: {
-        marginTop: theme.sizes.base*4,
+        marginTop: theme.sizes.base*5,
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: theme.colors.tertiary,

@@ -51,7 +51,7 @@ const Sip = (props) => {
           onChange={props.setPeriod}
         ></SliderComp>
         <SliderLabel
-          value={props.returns.toFixed(0)}
+          value={props.returns}
           label="Expected Returns (annual)"
           caption={"%"}
           onChange={props.setReturn}

@@ -4,7 +4,7 @@
     "slug": "MutualFundCalculators",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/playstore-icon.png",
+    "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,7 +20,7 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "android": {
       "package": "com.unishubh.gladiator"

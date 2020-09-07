@@ -73,9 +73,10 @@ class Calculator extends Component {
           this.state.returns.toFixed(0),
           this.state.period.toFixed(0)
         );
+        result=isNaN(result) ? 0: result;
         graphicData[0]["y"] =
           result - this.state.investment * 12 * this.state.period;
-        graphicData[1]["y"] = this.state.investment * 12 * this.state.period;
+        graphicData[1]["y"] = this.state.investment * 12 * this.state.period!=0?this.state.investment * 12 * this.state.period:1;
         console.log(result);
         // resultData = {
         //     graphicData :graphicData,
@@ -96,8 +97,9 @@ class Calculator extends Component {
           this.state.returns.toFixed(0),
           this.state.period.toFixed(0)
         );
+        result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] = result * 12 * this.state.period;
-        graphicData[1]["y"] = this.state.investment;
+        graphicData[1]["y"] = this.state.investment!=0?this.state.investment:1;
         graphicData[2]["result"] = result;
         console.log(result);
         return graphicData;
@@ -114,8 +116,9 @@ class Calculator extends Component {
           this.state.returns,
           this.state.period
         );
+        result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] = result - this.state.investment;
-        graphicData[1]["y"] = this.state.investment;
+        graphicData[1]["y"] = this.state.investment!=0?this.state.investment:1;
 
         return graphicData;
       }
@@ -133,9 +136,10 @@ class Calculator extends Component {
           this.state.returns,
           this.state.period
         );
+        result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] = result * 12 * this.state.period;
         graphicData[1]["y"] =
-          this.state.investment - result * 12 * this.state.period;
+          this.state.investment - result * 12 * this.state.period!=0?this.state.investment - result * 12 * this.state.period:1;
         graphicData[2]['result'] = result;
         console.log(result);
         return graphicData;
@@ -152,7 +156,7 @@ class Calculator extends Component {
           this.state.age,
           this.state.retirementAge
         );
-
+        result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] =
           result * 12 * (this.state.retirementAge - this.state.age);
         graphicData[1]["y"] = result;
