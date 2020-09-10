@@ -22,7 +22,8 @@ const SliderLabel = (props) => {
             value={`${props.value}`}
             keyboardType={'numeric'}
             numeric
-            
+            editable={editing}
+            selectTextOnFocus={editing}
             
             onChangeText={ text=>{
                 var num = isNaN(parseInt(text))? 0: parseInt(text);
@@ -30,8 +31,13 @@ const SliderLabel = (props) => {
                 num=num>=props.max?props.max:num;
                 props.onChange(parseFloat(num))}}/>
         {props.caption!="Rs."?<Text style={{marginTop:5}}>{props.caption} </Text>:null}
-                  <Icon name="pencil" size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
+                 {editing===false? (
+                    <Icon name="pencil" onPress={()=>Isediting(true)} size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
 
+                 ): (
+                    <Icon name="check" onPress={()=>Isediting(false)}  size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
+
+                 )} 
             
             </View>
            

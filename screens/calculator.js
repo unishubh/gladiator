@@ -30,10 +30,20 @@ class Calculator extends Component {
     age: 40,
     expense: 10,
     retirementAge: 60,
+    wealth:5000000,
+    tenure:35
   };
   setInvestment = (investment) => {
     this.setState({ investment });
   };
+
+  setWealth=(wealth)=>{
+    this.setState({wealth});
+  }
+
+  setTenure=(tenure)=>{
+    this.setState({tenure});
+  }
 
   setPeriod = (period) => {
     this.setState({ period });
@@ -131,15 +141,15 @@ class Calculator extends Component {
         ];
 
         result = calculateWealth(
-          this.state.investment,
+          this.state.wealth,
           12,
           this.state.returns,
-          this.state.period
+          this.state.tenure
         );
         result=isNaN(result) || !isFinite(result) ? 0: result;
-        graphicData[0]["y"] = result * 12 * this.state.period;
+        graphicData[0]["y"] = result * 12 * this.state.tenure;
         graphicData[1]["y"] =
-          this.state.investment - result * 12 * this.state.period!=0?this.state.investment - result * 12 * this.state.period:1;
+          this.state.wealth - result * 12 * this.state.tenure!=0?this.state.wealth - result * 12 * this.state.tenure:1;
         graphicData[2]['result'] = result;
         console.log(result);
         return graphicData;
@@ -199,11 +209,11 @@ class Calculator extends Component {
       case "Wealth":
         return (
           <Wealth
-            investment={this.state.investment}
-            period={this.state.period}
+            investment={this.state.wealth}
+            period={this.state.tenure}
             returns={this.state.returns}
-            setInvestment={this.setInvestment}
-            setPeriod={this.setPeriod}
+            setInvestment={this.setWealth}
+            setPeriod={this.setTenure}
             setReturn={this.setReturn}
           ></Wealth>
         );
@@ -248,21 +258,22 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
-      <View style={{flex:1,backgroundColor:'white' }}>
+      <ScrollView style={{flex:1,backgroundColor:'white' }}>
       <Header text={this.state.active}></Header>
+      
       <PieChart graphicData={resultData} active={this.state.active}></PieChart>
 
 <Tabcomponent
   active={this.state.active}
   onChange={this.setActive}
 ></Tabcomponent>
-        <ScrollView style={{flex:1}}>
+
           <View style={{paddingBottom:40,paddingTop:10}}>
 
           {this.renderScreen()}
           </View>
         </ScrollView>
-      </View>
+      
     );
   }
 }

@@ -16,6 +16,10 @@ const sliderMeasures={
     amountStep:500,
     roiStep:1,
     timeStep:1,
+    maxWealth:200000000,
+    minWealth:5000000,
+    minTenure:35,
+    maxTenure:75
 }
 
 export {sliderMeasures}

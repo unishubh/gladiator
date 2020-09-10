@@ -18,14 +18,15 @@ const Header = (props) => {
     <View style={{alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    
+    height:'100%',
     width: '100%',
-    height: '100%'}}>
+    }}>
+       
         <Text style={styles.text}> {props.text +" Calculator"}</Text>
-      <Image
+        <Image
       source={require ('../assets/headerimage.png')}
       style={styles.image}/>
-
+       
     </View>
     </View>
   );
@@ -48,7 +49,8 @@ const styles = StyleSheet.create({
         color:theme.colors.tertiary,
         fontWeight:'bold',
         fontSize:theme.sizes.font*2,
-        marginTop:-height/10
+        marginTop:-height/12,
+        
     }
 });
 export { Header };

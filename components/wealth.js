@@ -12,12 +12,12 @@ const Wealth = (props) => {
         value={props.investment.toFixed(0)}
         label="Wealth Desired"
         caption="Rs."
-        max={config.sliderMeasures.maxInvestment}
+        max={config.sliderMeasures.maxWealth}
         onChange={props.setInvestment}
       ></SliderLabel>
       <SliderComp
-        min={config.sliderMeasures.minInvestment}
-        max={config.sliderMeasures.maxInvestment}
+        min={config.sliderMeasures.minWealth}
+        max={config.sliderMeasures.maxWealth}
         value={props.investment}
         onChange={props.setInvestment}
         step={config.sliderMeasures.amountStep}
@@ -25,13 +25,13 @@ const Wealth = (props) => {
       <SliderLabel
         value={props.period.toFixed(0)}
         caption="years"
-        max={config.sliderMeasures.maxPeriod}
+        max={config.sliderMeasures.maxTenure}
         onChange={props.setPeriod}
         label="Tenure"
       ></SliderLabel>
       <SliderComp
-        min={config.sliderMeasures.minPeriod}
-        max={config.sliderMeasures.maxPeriod}
+        min={config.sliderMeasures.minTenure}
+        max={config.sliderMeasures.maxTenure}
         value={props.period}
         onChange={props.setPeriod}
         step={config.sliderMeasures.timeStep}

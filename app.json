@@ -23,7 +23,7 @@
       "favicon": "./assets/icon.png"
     },
     "android": {
-      "package": "com.unishubh.gladiator"
+      "package": "com.boozingo.calculator"
     }
   }
 }
