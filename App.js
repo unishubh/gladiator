@@ -1,14 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import Calculator from "./screens/calculator";
-import { NavigationContainer } from "@react-navigation/native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import * as eva from "@eva-design/eva";
-import Sip from "./screens/sip";
-import { ApplicationProvider } from "@ui-kitten/components";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Calculator from './screens/calculator';
+
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 
@@ -101,25 +97,22 @@ const HomeStack = createStackNavigator();
     );
   }
 }
-*/  
+*/
 
-
-
-function Home(){
+function Home() {
   return (
-    <HomeStack.Navigator
-      screenOptions={{headerShown:false}}>
-      <HomeStack.Screen name="Calculator" component={Calculator}/>
-      </HomeStack.Navigator>
-  )
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Calculator" component={Calculator} />
+    </HomeStack.Navigator>
+  );
 }
 
-export default function App(){
+export default function App() {
   return (
     <NavigationContainer>
-      <Home/>
-      </NavigationContainer>
-  )
+      <Home />
+    </NavigationContainer>
+  );
 }
 // /export default function App() {
 //   return (
@@ -141,7 +134,7 @@ export default function App(){
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    color: "red",
+    backgroundColor: '#fff',
+    color: 'red',
   },
 });

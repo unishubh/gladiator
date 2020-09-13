@@ -1,15 +1,15 @@
-import React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { theme } from "../constants";
-import { VictoryPie, VictoryLabel, VictoryArea } from "victory-native";
-import Svg from "react-native-svg";
+import React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import { VictoryPie, VictoryLabel, VictoryArea } from 'victory-native';
+import Svg from 'react-native-svg';
+import { theme } from '../constants';
 
-import "intl";
-import "intl/locale-data/jsonp/en";
+import 'intl';
+import 'intl/locale-data/jsonp/en';
 
 const BarChart = (props) => {
   return (
-    <View style={{ alignSelf: "center" }}>
+    <View style={{ alignSelf: 'center' }}>
       <Svg width={350} height={300}>
         <VictoryArea
           style={{ data: { fll: theme.colors.secondary } }}

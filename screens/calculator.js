@@ -22,7 +22,8 @@ import { Header } from "../components/header";
 
 class Calculator extends Component {
   state = {
-    investment: 10,
+    investment: 10000,
+    monthlyInvestment:1000,
     period: 2,
     returns: 6,
     active: "SIP",
@@ -33,6 +34,9 @@ class Calculator extends Component {
     wealth:5000000,
     tenure:35
   };
+  setMonthlyInvestment = (monthlyInvestment) => {
+    this.setState({monthlyInvestment});
+  }
   setInvestment = (investment) => {
     this.setState({ investment });
   };
@@ -78,15 +82,15 @@ class Calculator extends Component {
           { x: "Invested", y: 0 },
         ];
         result = calculateResult(
-          this.state.investment.toFixed(0),
+          this.state.monthlyInvestment.toFixed(0),
           12,
           this.state.returns.toFixed(0),
           this.state.period.toFixed(0)
         );
         result=isNaN(result) ? 0: result;
         graphicData[0]["y"] =
-          result - this.state.investment * 12 * this.state.period;
-        graphicData[1]["y"] = this.state.investment * 12 * this.state.period!=0?this.state.investment * 12 * this.state.period:1;
+          result - this.state.monthlyInvestment * 12 * this.state.period;
+        graphicData[1]["y"] = this.state.monthlyInvestment * 12 * this.state.period!=0?this.state.monthlyInvestment * 12 * this.state.period:1;
         console.log(result);
         // resultData = {
         //     graphicData :graphicData,
@@ -183,10 +187,10 @@ class Calculator extends Component {
       case "SIP":
         return (
           <Sip
-            investment={this.state.investment}
+            investment={this.state.monthlyInvestment}
             period={this.state.period}
             returns={this.state.returns}
-            setInvestment={this.setInvestment}
+            setInvestment={this.setMonthlyInvestment}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
           ></Sip>
@@ -261,7 +265,7 @@ class Calculator extends Component {
       <SafeAreaView style={styles.droidSafeArea}>
       <ScrollView style={{flex:1,backgroundColor:'white' }}>
       <Header text={this.state.active}></Header>
-      
+
       <PieChart graphicData={resultData} active={this.state.active}></PieChart>
 
 <Tabcomponent
