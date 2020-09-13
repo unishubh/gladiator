@@ -4,10 +4,10 @@ import Slider from 'react-native-slider'
 import { theme, config } from '../constants'
 import { SliderLabel } from "./SliderLabel";
 import { SliderComp } from "./slider";
-const { width } = Dimensions.get("window")
+const { width,height } = Dimensions.get("window")
 
 renderTab=(tab,props)=> {
-   
+
     const isActive = props.active === tab
     return (
       <TouchableOpacity
@@ -22,11 +22,11 @@ renderTab=(tab,props)=> {
   }
   handleTab = (tab,props) => {
     props.onChange(tab);
-  
+
   }
 
 const Tabcomponent = (props) => {
-    const tabs = ['SIP', 'SIP Delay', 'Wealth', 'Lumpsum', 'EMI', 'Insurance']
+    const tabs = ['SIP', 'Wealth', 'Lumpsum', 'EMI']
 
     return (
         <View style={styles.tabs}>
@@ -38,7 +38,7 @@ const Tabcomponent = (props) => {
 const styles = StyleSheet.create({
 
     tabs: {
-        marginTop: theme.sizes.base,
+        marginTop: theme.sizes.base*0.025,
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: theme.colors.tertiary,
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         height: theme.sizes.base * 3,
       },
       active: {
-    
+
         borderColor: "white",
         borderWidth: 2,
         backgroundColor: theme.colors.secondary,
@@ -55,14 +55,15 @@ const styles = StyleSheet.create({
         height: theme.sizes.base * 3,
         justifyContent: "center",
         alignItems: "center",
-        width: width / 6,
+        width: width / 4,
         fontSize: 2,
         padding: theme.sizes.base * 0.05
       },
       tabText: {
         color: "white",
-        fontSize: theme.sizes.font - 2,
-    
+        fontSize: theme.sizes.font,
+          fontWeight:"bold",
+
       }
 });
 export { Tabcomponent };

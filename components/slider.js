@@ -21,7 +21,8 @@ const SliderComp = (props) => {
                 marginRight={theme.sizes.base}
                 marginLeft={theme.sizes.base}
                 marginTop={theme.sizes.base * 0.25}
-                onValueChange={value => props.onChange(value)}
+                step={props.step}
+                onSlidingComplete={value => props.onChange(value)}
             />
 
         </View>
