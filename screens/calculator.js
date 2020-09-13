@@ -147,8 +147,8 @@ class Calculator extends Component {
           this.state.tenure
         );
         result=isNaN(result) || !isFinite(result) ? 0: result;
-        graphicData[0]["y"] = result * 12 * this.state.tenure;
-        graphicData[1]["y"] =
+        graphicData[1]["y"] = result * 12 * this.state.tenure;
+        graphicData[0]["y"] =
           this.state.wealth - result * 12 * this.state.tenure!=0?this.state.wealth - result * 12 * this.state.tenure:1;
         graphicData[2]['result'] = result;
         console.log(result);
@@ -258,6 +258,7 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
+      <SafeAreaView style={styles.droidSafeArea}>
       <ScrollView style={{flex:1,backgroundColor:'white' }}>
       <Header text={this.state.active}></Header>
       
@@ -273,7 +274,7 @@ class Calculator extends Component {
           {this.renderScreen()}
           </View>
         </ScrollView>
-      
+        </SafeAreaView>
     );
   }
 }
@@ -284,6 +285,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+  droidSafeArea: {
+    flex: 1,
+    backgroundColor: theme.colors.secondary,
+    paddingTop: Platform.OS === 'android' ? 28 : 0
+},
 });
 
 export default Calculator;

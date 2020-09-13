@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput, View, StyleSheet,Image,Dimensions,Text } from "react-native";
+import { TextInput, View, StyleSheet,Image,Dimensions,Text, KeyboardAvoidingView } from "react-native";
 import Slider from "react-native-slider";
 import { theme, config } from "../constants";
 import { SliderLabel } from "./SliderLabel";
@@ -11,7 +11,7 @@ const { width,height } = Dimensions.get("window");
 
 const Header = (props) => {
   return (
-      <View>
+      <KeyboardAvoidingView>
           <Image
       source={require ('../assets/banner.png')}
       style={styles.banner}/>
@@ -28,7 +28,7 @@ const Header = (props) => {
       style={styles.image}/>
        
     </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

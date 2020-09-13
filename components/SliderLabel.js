@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Text, View, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import React, { useState, useRef } from "react";
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Keyboard } from "react-native";
 import { theme, config } from '../constants'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const SliderLabel = (props) => {
     const [editing,Isediting]=useState(false);
-    
+    const inputRef=useRef()
 
     return (
 
@@ -25,6 +25,7 @@ const SliderLabel = (props) => {
             editable={editing}
             selectTextOnFocus={editing}
             
+            ref={inputRef}
             onChangeText={ text=>{
                 var num = isNaN(parseInt(text))? 0: parseInt(text);
                 num=props.caption==="Rs. " && num===0 ?1:num;
@@ -32,10 +33,15 @@ const SliderLabel = (props) => {
                 props.onChange(parseFloat(num))}}/>
         {props.caption!="Rs."?<Text style={{marginTop:5}}>{props.caption} </Text>:null}
                  {editing===false? (
-                    <Icon name="pencil" onPress={()=>Isediting(true)} size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
+                    <Icon name="pencil" onPress={()=>{
+                        Isediting(true)
+                        setTimeout(() => inputRef.current.focus(), 0)
+                       }} size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
 
                  ): (
-                    <Icon name="check" onPress={()=>Isediting(false)}  size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
+                    <Icon name="check" onPress={()=>{
+                        Keyboard.dismiss()
+                        Isediting(false)}}  size={20} color={theme.colors.tertiary} style={{marginLeft:theme.sizes.base}}></Icon>
 
                  )} 
             
