@@ -1,55 +1,55 @@
-import React from "react";
-import { TextInput, View, StyleSheet } from "react-native";
-import Slider from "react-native-slider";
-import { theme, config } from "../constants";
-import { SliderLabel } from "./SliderLabel";
-import { SliderComp } from "./slider";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { config } from '../constants';
+import { numberWithCommas } from '../utils/formatter';
+import { SliderLabel } from './SliderLabel';
+import { SliderComp } from './slider';
 
 const Wealth = (props) => {
   return (
     <View>
       <SliderLabel
-        value={props.investment.toFixed(0)}
+        value={numberWithCommas(props.investment.toFixed(0))}
         label="Wealth Desired"
         caption="Rs."
-        max={config.sliderMeasures.maxWealth}
+        max={config.sliderMeasures.wealth.maxAmount}
         onChange={props.setInvestment}
-      ></SliderLabel>
+      />
       <SliderComp
-        min={config.sliderMeasures.minWealth}
-        max={config.sliderMeasures.maxWealth}
+        min={config.sliderMeasures.wealth.minAmount}
+        max={config.sliderMeasures.wealth.maxAmount}
         value={props.investment}
         onChange={props.setInvestment}
-        step={config.sliderMeasures.amountStep}
-      ></SliderComp>
+        step={config.sliderMeasures.wealth.amountStep}
+      />
       <SliderLabel
         value={props.period.toFixed(0)}
         caption="years"
-        max={config.sliderMeasures.maxTenure}
+        max={config.sliderMeasures.wealth.maxPeriod}
         onChange={props.setPeriod}
         label="Tenure"
-      ></SliderLabel>
+      />
       <SliderComp
-        min={config.sliderMeasures.minTenure}
-        max={config.sliderMeasures.maxTenure}
+        min={config.sliderMeasures.wealth.minPeriod}
+        max={config.sliderMeasures.wealth.maxPeriod}
         value={props.period}
         onChange={props.setPeriod}
-        step={config.sliderMeasures.timeStep}
-      ></SliderComp>
+        step={config.sliderMeasures.wealth.periodStep}
+      />
       <SliderLabel
         value={props.returns.toFixed(0)}
         caption="%"
         onChange={props.setReturn}
-        max={config.sliderMeasures.maxReturn}
+        max={config.sliderMeasures.wealth.maxRoi}
         label="Expected Returns (annual)"
-      ></SliderLabel>
+      />
       <SliderComp
-        min={config.sliderMeasures.minReturn}
-        max={config.sliderMeasures.maxReturn}
+        min={config.sliderMeasures.wealth.minRoi}
+        max={config.sliderMeasures.wealth.maxRoi}
         value={props.returns}
         onChange={props.setReturn}
-        step={config.sliderMeasures.roiStep}
-      ></SliderComp>
+        step={config.sliderMeasures.wealth.roiStep}
+      />
     </View>
   );
 };

@@ -1,6 +1,6 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Card, Text } from "@ui-kitten/components";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Card, Text } from '@ui-kitten/components';
 
 const ResultComponent = (props) => {
   return (
@@ -32,15 +32,15 @@ const ResultComponent = (props) => {
 const style = StyleSheet.create({
   Row: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
   },
   Cell: {
     flex: 1,
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   Banner: {
-    backgroundColor: "#a3b7d9",
+    backgroundColor: '#a3b7d9',
     padding: 2,
   },
 });

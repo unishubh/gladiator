@@ -1,6 +1,6 @@
-import React from "react";
-import { TextInput, View, StyleSheet } from "react-native";
-import { Text, Input } from "@ui-kitten/components";
+import React from 'react';
+import { TextInput, View, StyleSheet } from 'react-native';
+import { Text, Input } from '@ui-kitten/components';
 
 const FormText = (props) => {
   return (
@@ -8,10 +8,7 @@ const FormText = (props) => {
       <Text style={style.Label} category="h1">
         {props.label}
       </Text>
-      <Input
-        onChangeText={(text) => props.onChange(text)}
-        accessoryRight={props.icon}
-      ></Input>
+      <Input onChangeText={(text) => props.onChange(text)} accessoryRight={props.icon} />
     </View>
   );
 };

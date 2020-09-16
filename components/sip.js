@@ -1,18 +1,16 @@
-import React from "react";
-import { TextInput, View, StyleSheet } from "react-native";
-import Slider from "react-native-slider";
-import { theme, config } from "../constants";
-import { SliderLabel } from "./SliderLabel";
-import { SliderComp } from "./slider";
-import Accordian from "./accordian";
-import data from "../data/sip.json";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { numberWithCommas } from '../utils/formatter';
+import { config } from '../constants';
+import { SliderLabel } from './SliderLabel';
+import { SliderComp } from './slider';
+import Accordian from './accordian';
+import data from '../data/sip.json';
 
-renderAccordians = () => {
+const renderAccordians = () => {
   const items = [];
   data.map((item) => {
-    items.push(
-      <Accordian key={item.title} title={item.title} data={item.data} />
-    );
+    items.push(<Accordian key={item.title} title={item.title} data={item.data} />);
   });
 
   return items;
@@ -23,47 +21,47 @@ const Sip = (props) => {
     <View>
       <View>
         <SliderLabel
-          value={props.investment.toFixed(0)}
+          value={numberWithCommas(props.investment.toFixed(0))}
           onChange={props.setInvestment}
           label="Monthly Investment"
           caption="Rs."
-          max={config.sliderMeasures.maxInvestment}
-        ></SliderLabel>
+          max={config.sliderMeasures.sip.maxAmount}
+        />
         <SliderComp
-          step={config.sliderMeasures.amountStep}
-          min={config.sliderMeasures.minInvestment}
-          max={config.sliderMeasures.maxInvestment}
+          step={config.sliderMeasures.sip.getAmountStep(props.investment.toFixed(0))}
+          min={config.sliderMeasures.sip.minAmount}
+          max={config.sliderMeasures.sip.maxAmount}
           value={props.investment}
           onChange={props.setInvestment}
-        ></SliderComp>
+        />
         <SliderLabel
           value={props.period.toFixed(0)}
           label="Investment Period"
           caption="years"
           onChange={props.setPeriod}
-          max={config.sliderMeasures.maxPeriod}
-        ></SliderLabel>
+          max={config.sliderMeasures.sip.maxPeriod}
+        />
         <SliderComp
-          step={config.sliderMeasures.timeStep}
-          min={config.sliderMeasures.minPeriod}
-          max={config.sliderMeasures.maxPeriod}
+          step={config.sliderMeasures.sip.periodStep}
+          min={config.sliderMeasures.sip.minPeriod}
+          max={config.sliderMeasures.sip.maxPeriod}
           value={props.period}
           onChange={props.setPeriod}
-        ></SliderComp>
+        />
         <SliderLabel
           value={props.returns}
           label="Expected Returns (annual)"
-          caption={"%"}
+          caption="%"
           onChange={props.setReturn}
-          max={config.sliderMeasures.maxReturn}
-        ></SliderLabel>
+          max={config.sliderMeasures.sip.maxReturn}
+        />
         <SliderComp
-          step={config.sliderMeasures.roiStep}
-          min={config.sliderMeasures.minReturn}
-          max={config.sliderMeasures.maxReturn}
+          step={config.sliderMeasures.sip.roiStep}
+          min={config.sliderMeasures.sip.minReturn}
+          max={config.sliderMeasures.sip.maxReturn}
           value={props.returns}
           onChange={props.setReturn}
-        ></SliderComp>
+        />
       </View>
     </View>
   );
