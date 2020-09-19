@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, Keyboard } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { theme, config } from '../constants';
+import { numberWithCommas } from '../utils/formatter';
+import { theme } from '../constants';
 
 const SliderLabel = (props) => {
   const [editing, Isediting] = useState(false);
@@ -14,7 +15,7 @@ const SliderLabel = (props) => {
       <View style={{ flexDirection: 'row' }}>
         {props.caption === 'Rs.' ? <Text style={{ marginTop: 5 }}>Rs. </Text> : null}
         <TextInput
-          value={`${props.value}`}
+          value={numberWithCommas(`${props.value}`)}
           keyboardType="numeric"
           numeric
           editable={editing}
@@ -27,7 +28,7 @@ const SliderLabel = (props) => {
             props.onChange(parseFloat(num));
           }}
         />
-        {props.caption != 'Rs.' ? <Text style={{ marginTop: 5 }}>{props.caption} </Text> : null}
+        {props.caption !== 'Rs.' ? <Text style={{ marginTop: 5 }}>{props.caption} </Text> : null}
         {editing === false ? (
           <Icon
             name="pencil"

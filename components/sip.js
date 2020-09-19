@@ -21,7 +21,7 @@ const Sip = (props) => {
     <View>
       <View>
         <SliderLabel
-          value={numberWithCommas(props.investment.toFixed(0))}
+          value={props.investment.toFixed(0)}
           onChange={props.setInvestment}
           label="Monthly Investment"
           caption="Rs."

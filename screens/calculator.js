@@ -113,7 +113,7 @@ class Calculator extends Component {
         );
         result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] = result * 12 * this.state.period;
-        graphicData[1]["y"] = this.state.investment!=0?this.state.investment:1;
+        graphicData[1]["y"] = this.state.investment!==0?this.state.investment:1;
         graphicData[2]["result"] = result;
         console.log(result);
         return graphicData;
@@ -132,7 +132,7 @@ class Calculator extends Component {
         );
         result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[0]["y"] = result - this.state.investment;
-        graphicData[1]["y"] = this.state.investment!=0?this.state.investment:1;
+        graphicData[1]["y"] = this.state.investment!==0?this.state.investment:1;
 
         return graphicData;
       }
@@ -153,7 +153,7 @@ class Calculator extends Component {
         result=isNaN(result) || !isFinite(result) ? 0: result;
         graphicData[1]["y"] = result * 12 * this.state.tenure;
         graphicData[0]["y"] =
-          this.state.wealth - result * 12 * this.state.tenure!=0?this.state.wealth - result * 12 * this.state.tenure:1;
+          this.state.wealth - result * 12 * this.state.tenure!==0?this.state.wealth - result * 12 * this.state.tenure:1;
         graphicData[2]['result'] = result;
         console.log(result);
         return graphicData;
@@ -193,7 +193,7 @@ class Calculator extends Component {
             setInvestment={this.setMonthlyInvestment}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
-          ></Sip>
+          />
         );
         break;
       case "SIP Delay":
@@ -207,7 +207,7 @@ class Calculator extends Component {
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
             setDelay={this.setDelay}
-          ></SipDelay>
+          />
         );
         break;
       case "Wealth":
@@ -219,7 +219,7 @@ class Calculator extends Component {
             setInvestment={this.setWealth}
             setPeriod={this.setTenure}
             setReturn={this.setReturn}
-          ></Wealth>
+          />
         );
         break;
       case "Lumpsum":
@@ -231,7 +231,7 @@ class Calculator extends Component {
             setInvestment={this.setInvestment}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
-          ></Lumpsum>
+          />
         );
       case "EMI":
         return (
@@ -242,7 +242,7 @@ class Calculator extends Component {
             setInvestment={this.setInvestment}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
-          ></Emicalc>
+          />
         );
         break;
       case "Insurance":
@@ -254,7 +254,7 @@ class Calculator extends Component {
             setExpense={this.setExpense}
             setAge={this.setAge}
             setRetirementAge={this.setRetirementAge}
-          ></Insurance>
+          />
         );
     }
   }
