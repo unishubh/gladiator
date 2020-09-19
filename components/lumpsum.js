@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { numberWithCommas } from '../utils/formatter';
+import { GetNumberWithCommas } from 'number-formatter';
 import { config } from '../constants';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
@@ -9,7 +9,7 @@ const Lumpsum = (props) => {
   return (
     <View>
       <SliderLabel
-        value={numberWithCommas(props.investment.toFixed(0))}
+        value={GetNumberWithCommas(props.investment.toFixed(0))}
         onChange={props.setInvestment}
         label="Total One Tme Investment"
         max={config.sliderMeasures.lumpsum.maxAmount}

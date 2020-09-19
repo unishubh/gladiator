@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { numberWithCommas } from '../utils/formatter';
+import { GetNumberWithCommas } from 'number-formatter';
 import { config } from '../constants';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
@@ -9,7 +9,7 @@ const Emicalc = (props) => {
   return (
     <View>
       <SliderLabel
-        value={numberWithCommas(props.investment.toFixed(0))}
+        value={GetNumberWithCommas(props.investment.toFixed(0))}
         label="Loan Amount"
         caption="Rs."
         max={config.sliderMeasures.emi.maxAmount}

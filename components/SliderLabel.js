@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Text, View, StyleSheet, TextInput, Keyboard } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { numberWithCommas } from '../utils/formatter';
+import { GetNumberFromCommaSeparatedNumber } from 'number-formatter';
 import { theme } from '../constants';
 
 const SliderLabel = (props) => {
@@ -22,9 +22,9 @@ const SliderLabel = (props) => {
           selectTextOnFocus={editing}
           ref={inputRef}
           onChangeText={(text) => {
-            let num = isNaN(parseInt(text.replace(/,/g, '')))
+            let num = isNaN(parseInt(GetNumberFromCommaSeparatedNumber(text)))
               ? 0
-              : parseInt(text.replace(/,/g, ''));
+              : parseInt(GetNumberFromCommaSeparatedNumber(text));
             num = props.caption === 'Rs. ' && num === 0 ? 1 : num;
             num = num >= props.max ? props.max : num;
             props.onChange(parseFloat(num));

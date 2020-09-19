@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { GetNumberWithCommas } from 'number-formatter';
 import { config } from '../constants';
-import { numberWithCommas } from '../utils/formatter';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
 
@@ -9,7 +9,7 @@ const Wealth = (props) => {
   return (
     <View>
       <SliderLabel
-        value={numberWithCommas(props.investment.toFixed(0))}
+        value={GetNumberWithCommas(props.investment.toFixed(0))}
         label="Wealth Desired"
         caption="Rs."
         max={config.sliderMeasures.wealth.maxAmount}

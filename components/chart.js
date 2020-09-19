@@ -2,7 +2,7 @@ import React from 'react';
 import { VictoryPie, VictoryLabel } from 'victory-native';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import Svg from 'react-native-svg';
-import { approximate } from '../utils/formatter';
+import { ApproximateNumberInWords } from 'number-formatter';
 import { theme } from '../constants';
 
 import 'intl';
@@ -70,7 +70,9 @@ const PieChart = (props) => {
           height={300}
           innerRadius={50}
           radius={90}
-          labels={({ datum }) => `${datum.x}\n \u20b9 ${approximate(datum.y.toFixed(0))}`}
+          labels={({ datum }) =>
+            `${datum.x}\n \u20b9 ${ApproximateNumberInWords(datum.y.toFixed(0))}`
+          }
           style={{
             labels: {
               fill: 'black',
@@ -86,7 +88,7 @@ const PieChart = (props) => {
           style={{ fontSize: 12, fontWeight: 'bold' }}
           x={width / 2}
           y={150}
-          text={`${label} \n \u20B9 ${approximate(res.toFixed(0))}`}
+          text={`${label} \n \u20B9 ${ApproximateNumberInWords(res.toFixed(0))}`}
         />
       </Svg>
     </View>
