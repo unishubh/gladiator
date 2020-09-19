@@ -15,7 +15,7 @@ const SliderLabel = (props) => {
       <View style={{ flexDirection: 'row' }}>
         {props.caption === 'Rs.' ? <Text style={{ marginTop: 5 }}>Rs. </Text> : null}
         <TextInput
-          value={numberWithCommas(`${props.value}`)}
+          value={`${props.value}`}
           keyboardType="numeric"
           numeric
           editable={editing}
