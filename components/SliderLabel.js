@@ -22,7 +22,9 @@ const SliderLabel = (props) => {
           selectTextOnFocus={editing}
           ref={inputRef}
           onChangeText={(text) => {
-            let num = isNaN(parseInt(text)) ? 0 : parseInt(text);
+            let num = isNaN(parseInt(text.replace(/,/g, '')))
+              ? 0
+              : parseInt(text.replace(/,/g, ''));
             num = props.caption === 'Rs. ' && num === 0 ? 1 : num;
             num = num >= props.max ? props.max : num;
             props.onChange(parseFloat(num));
