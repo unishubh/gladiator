@@ -1,8 +1,14 @@
 import React, { useState, useRef } from 'react';
-import { Text, View, StyleSheet, TextInput, Keyboard } from 'react-native';
+import { Text, View, StyleSheet, TextInput, Keyboard, ToastAndroid, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GetNumberFromCommaSeparatedNumber } from 'number-formatter';
 import { theme } from '../constants';
+
+const showToast = (msg) => {
+  if (Platform.OS === 'android') {
+    ToastAndroid.show(msg, ToastAndroid.SHORT);
+  }
+};
 
 const SliderLabel = (props) => {
   const [editing, Isediting] = useState(false);
@@ -26,6 +32,10 @@ const SliderLabel = (props) => {
               ? 0
               : parseInt(GetNumberFromCommaSeparatedNumber(text));
             num = props.caption === 'Rs. ' && num === 0 ? 1 : num;
+            if (num > props.max) {
+              num = props.max;
+              showToast(`Maximum value allowed : ${props.caption==='Rs'?props.caption:""} ${props.max} ${props.caption!='Rs'?props.caption:""}`);
+            }
             num = num >= props.max ? props.max : num;
             props.onChange(parseFloat(num));
           }}

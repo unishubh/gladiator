@@ -3,12 +3,26 @@ const sliderMeasures = {
     maxAmount: 200000000,
     minAmount: 5000000,
     amountStep: 1000000,
-    minPeriod: 35,
-    maxPeriod: 70,
+    minPeriod: 5,
+    maxPeriod: 50,
     periodStep: 1,
     minRoi: 1,
     maxRoi: 40,
     roiStep: 1,
+    getWealthStep: (wealth) => {
+      const wealthFirstChange = 20000000;
+      const wealthStepBeforeFirstChange = 1000000;
+      const wealthStepAfterFirstChange = 5000000;
+      if (wealth < wealthFirstChange) return wealthStepBeforeFirstChange;
+      return wealthStepAfterFirstChange;
+    },
+    getPeriodStep: (period) => {
+      const periodFirstChange = 20;
+      const periodStepBeforeFirstChange = 1;
+      const periodStepAfterFirstChange = 5;
+      if (period <= periodFirstChange) return periodStepBeforeFirstChange;
+      return periodStepAfterFirstChange;
+    },
   },
   sip: {
     minAmount: 500,
@@ -29,8 +43,8 @@ const sliderMeasures = {
     },
   },
   lumpsum: {
-    minAmount: 10000,
-    maxAmount: 20000000,
+    minAmount: 50000,
+    maxAmount: 50000000,
     amountStep: 100,
     minPeriod: 1,
     maxPeriod: 50,
@@ -39,20 +53,20 @@ const sliderMeasures = {
     maxReturn: 40,
     roiStep: 1,
     getAmountStep: (amount) => {
-      const amountFirstChange = 200000;
-      const amountSecondChange = 1000000;
-      const amountStepBeforeFirstChange = 10000;
-      const amountStepAfterFirstChange = 50000;
-      const amountStepAfterSecondChange = 100000;
-      if (amount < amountFirstChange) return amountStepBeforeFirstChange;
-      if (amount > amountFirstChange && amount < amountSecondChange)
+      const amountFirstChange = 100000;
+      const amountSecondChange = 2000000;
+      const amountStepBeforeFirstChange = 50000;
+      const amountStepAfterFirstChange = 100000;
+      const amountStepAfterSecondChange = 500000;
+      if (amount <= amountFirstChange) return amountStepBeforeFirstChange;
+      if (amount > amountFirstChange && amount <= amountSecondChange)
         return amountStepAfterFirstChange;
       return amountStepAfterSecondChange;
     },
   },
   emi: {
     minAmount: 100000,
-    maxAmount: 20000000,
+    maxAmount: 50000000,
     amountStep: 100,
     minPeriod: 1,
     maxPeriod: 50,
