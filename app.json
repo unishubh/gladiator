@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "DoneWithIt",
-    "slug": "DoneWithIt",
-    "version": "1.0.0",
+    "name": "Mutual Fund Calculators",
+    "slug": "MutualFundCalculators",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -20,7 +20,11 @@
       "supportsTablet": true
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
+    },
+    "android": {
+      "package": "com.unishubh.gladiator",
+      "versionCode":2
     }
   }
 }

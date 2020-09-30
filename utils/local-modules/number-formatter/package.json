@@ -1,0 +1,18 @@
+{
+  "name": "number-formatter",
+  "version": "1.0.0",
+  "description": "A package to format numbers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "npm",
+    "maths",
+    "number",
+    "formatter",
+    "formatting"
+  ],
+  "author": "Shubham Shukla",
+  "license": "ISC"
+}

@@ -1,9 +1,4 @@
-import * as theme from './theme'
-import * as config from './config'
+import * as theme from './theme';
+import * as config from './config';
 
-
-export {
-    theme,
-    config
-    
-}
+export { theme, config };

@@ -1,21 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import Emi from "./screens/emi";
-import { NavigationContainer } from "@react-navigation/native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import * as eva from "@eva-design/eva";
-import Sip from "./screens/sip";
-import { ApplicationProvider } from "@ui-kitten/components";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import Calculator from './screens/calculator';
+
 const Tab = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
-class App extends Component {
-  constructor() {
-    super();
-  }
 
+/*
   SipStack() {
     return (
       <HomeStack.Navigator>
@@ -33,12 +26,14 @@ class App extends Component {
       <HomeStack.Navigator>
         <HomeStack.Screen
           name="EMI Calculator"
-          component={Emi}
+          component={Calculator}
           headerTitle="EMI Calculator"
         />
       </HomeStack.Navigator>
     );
   }
+
+
 
   render() {
     return (
@@ -70,7 +65,7 @@ class App extends Component {
               name="EMI"
               component={this.EMIStack}
               options={{
-                tabBarLabel: "Emi",
+                tabBarLabel: "Calculator",
                 title: "EMI Calculator",
 
                 tabBarIcon: ({ color, size }) => (
@@ -102,8 +97,23 @@ class App extends Component {
     );
   }
 }
+*/
 
-export default App;
+function Home() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen name="Calculator" component={Calculator} />
+    </HomeStack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Home />
+    </NavigationContainer>
+  );
+}
 // /export default function App() {
 //   return (
 //     <View style={styles.container}>
@@ -124,7 +134,7 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    color: "red",
+    backgroundColor: '#fff',
+    color: 'red',
   },
 });

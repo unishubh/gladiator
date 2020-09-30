@@ -1,18 +1,88 @@
-const sliderMeasures={
-    minInvestment:0,
-    maxInvestment:20000,
-    minPeriod:0,
-    maxPeriod:5,
-    minReturn:0,
-    maxReturn:12,
-    minDelay:1,
-    maxDelay:12,
-    minExpense:10,
-    maxExpense:40000,
-    minAge:25,
-    maxAge:100,
-    minRetirementAge:50,
-    maxRetirementAge:100
-}
+const sliderMeasures = {
+  wealth: {
+    maxAmount: 200000000,
+    minAmount: 5000000,
+    amountStep: 1000000,
+    minPeriod: 5,
+    maxPeriod: 50,
+    periodStep: 1,
+    minRoi: 1,
+    maxRoi: 40,
+    roiStep: 1,
+    getWealthStep: (wealth) => {
+      const wealthFirstChange = 20000000;
+      const wealthStepBeforeFirstChange = 1000000;
+      const wealthStepAfterFirstChange = 5000000;
+      if (wealth < wealthFirstChange) return wealthStepBeforeFirstChange;
+      return wealthStepAfterFirstChange;
+    },
+    getPeriodStep: (period) => {
+      const periodFirstChange = 20;
+      const periodStepBeforeFirstChange = 1;
+      const periodStepAfterFirstChange = 5;
+      if (period <= periodFirstChange) return periodStepBeforeFirstChange;
+      return periodStepAfterFirstChange;
+    },
+  },
+  sip: {
+    minAmount: 500,
+    maxAmount: 200000,
+    amountStep: 100,
+    minPeriod: 1,
+    maxPeriod: 50,
+    periodStep: 1,
+    minReturn: 1,
+    maxReturn: 40,
+    roiStep: 1,
+    getAmountStep: (amount) => {
+      const amountFirstChange = 25000;
+      const amountStepbeforeFirstChange = 1000;
+      const amountStepafterFirstChange = 5000;
+      if (amount < amountFirstChange) return amountStepbeforeFirstChange;
+      return amountStepafterFirstChange;
+    },
+  },
+  lumpsum: {
+    minAmount: 50000,
+    maxAmount: 50000000,
+    amountStep: 100,
+    minPeriod: 1,
+    maxPeriod: 50,
+    periodStep: 1,
+    minReturn: 1,
+    maxReturn: 40,
+    roiStep: 1,
+    getAmountStep: (amount) => {
+      const amountFirstChange = 100000;
+      const amountSecondChange = 2000000;
+      const amountStepBeforeFirstChange = 50000;
+      const amountStepAfterFirstChange = 100000;
+      const amountStepAfterSecondChange = 500000;
+      if (amount <= amountFirstChange) return amountStepBeforeFirstChange;
+      if (amount > amountFirstChange && amount <= amountSecondChange)
+        return amountStepAfterFirstChange;
+      return amountStepAfterSecondChange;
+    },
+  },
+  emi: {
+    minAmount: 100000,
+    maxAmount: 50000000,
+    amountStep: 100,
+    minPeriod: 1,
+    maxPeriod: 50,
+    periodStep: 1,
+    minReturn: 1,
+    maxReturn: 40,
+    roiStep: 1,
+    getAmountStep: (amount) => {
+      const amountFirstChange = 2500000;
+      const amountStepBeforeFirstChange = 100000;
+      const amountStepAfterFirstChange = 500000;
+      if (amount < amountFirstChange) return amountStepBeforeFirstChange;
+      return amountStepAfterFirstChange;
+    },
+  },
+};
 
-export {sliderMeasures}
+// eslint-disable-next-line import/prefer-default-export
+export { sliderMeasures };
