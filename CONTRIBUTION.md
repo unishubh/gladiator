@@ -1,7 +1,7 @@
 
 # Contributing to Mutual fund calculator
 
-Thank you for your interest in contributing to out project! From commenting on and triaging issues, to raising Pull Requests, all contributions are welcome. 
+Thank you for your interest in contributing to our project! From commenting on and triaging issues, to raising Pull Requests, all contributions are welcome. 
 
 ## Ways to Contribute
 
