@@ -1,11 +1,18 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text,Dimensions } from 'react-native';
 import { GetNumberWithCommas } from 'number-formatter';
-import { config } from '../constants';
+import { config,theme } from '../constants';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
+import { ModalComp } from './modal';
+const { width, height } = Dimensions.get('window');
 
 const Lumpsum = (props) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
   return (
     <View>
       <SliderLabel
@@ -50,9 +57,34 @@ const Lumpsum = (props) => {
         onChange={props.setReturn}
         step={config.sliderMeasures.lumpsum.roiStep}
       />
+      <TouchableOpacity style={styles.modalBtn} onPress={() => setShowModal(true)}>
+        <Text style={styles.modalBtnText}>Expected values for next 30 years</Text>
+      </TouchableOpacity>
+      <ModalComp
+        inputValue={props.investment}
+        rateValue={props.returns}
+        futureReturn={showModal}
+        setFutureReturn={closeModal}
+        calculation="lumpsum"
+      />
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalBtn: {
+    backgroundColor: theme.colors.tertiary,
+    width: width / 1.25,
+    alignItems: 'center',
+    height: theme.sizes.base * 3,
+    alignSelf: 'center',
+    margin: theme.sizes.base,
+    justifyContent: 'center',
+  },
+  modalBtnText: {
+    color: 'white',
+    fontSize: theme.sizes.font,
+    fontWeight: 'bold',
+  },
+});
 export { Lumpsum };

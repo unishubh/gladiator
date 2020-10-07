@@ -1,11 +1,14 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, Button, TouchableOpacity, Dimensions, Text } from 'react-native';
 import { GetNumberWithCommas } from 'number-formatter';
-import { config } from '../constants';
+import { config, theme } from '../constants';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
 import Accordian from './accordian';
 import data from '../data/sip.json';
+import { ModalComp } from './modal';
+
+const { width, height } = Dimensions.get('window');
 
 const renderAccordians = () => {
   const items = [];
@@ -17,6 +20,12 @@ const renderAccordians = () => {
 };
 
 const Sip = (props) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <View>
       <View>
@@ -63,9 +72,35 @@ const Sip = (props) => {
           onChange={props.setReturn}
         />
       </View>
+      <TouchableOpacity style={styles.modalBtn} onPress={() => setShowModal(true)}>
+        <Text style={styles.modalBtnText}>Expected values for next 30 years</Text>
+      </TouchableOpacity>
+
+      <ModalComp
+        inputValue={props.investment}
+        rateValue={props.returns}
+        futureReturn={showModal}
+        setFutureReturn={closeModal}
+      />
     </View>
-  );
+  );       
+
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  modalBtn: {
+    backgroundColor: theme.colors.tertiary,
+    width: width / 1.25,
+    alignItems: 'center',
+    height: theme.sizes.base * 3,
+    alignSelf: 'center',
+    margin: theme.sizes.base,
+    justifyContent: 'center',
+  },
+  modalBtnText: {
+    color: 'white',
+    fontSize: theme.sizes.font,
+    fontWeight: 'bold',
+  },
+});
 export { Sip };

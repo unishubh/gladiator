@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions} from "react-native";
 import { theme } from "../constants";
 
 import { PieChart } from "../components/chart";
@@ -19,6 +19,7 @@ import { Insurance } from "../components/insurance";
 import { Tabcomponent } from "../components/tabs";
 import { BarChart } from "../components/barChart";
 import { Header } from "../components/header";
+const { width, height } = Dimensions.get('window');
 
 class Calculator extends Component {
   state = {
@@ -32,8 +33,14 @@ class Calculator extends Component {
     expense: 10,
     retirementAge: 60,
     wealth:5000000,
-    tenure:35
+    tenure:35,
+    futureReturn:false
   };
+
+  setFutureReturns=()=>{
+    this.setState({futureReturn : true});
+  }
+
   setMonthlyInvestment = (monthlyInvestment) => {
     this.setState({monthlyInvestment});
   }
@@ -259,6 +266,20 @@ class Calculator extends Component {
     }
   }
 
+  renderFutureReturnModal(){
+    return (
+      <Modal
+        animationType="slide"
+        visible={this.state.futureReturn}
+        onRequestClose={()=>this.setState({futureReturn:false})}
+        transparent={true}>
+          <ScrollView style={styles.modalContainer}>
+            <Text>Calculations based on investment of Rs. 2000 at 12% return</Text>
+          </ScrollView>
+      </Modal>
+    )
+  }
+
   render() {
     const resultData = this.calculateResult();
     return (
@@ -277,6 +298,7 @@ class Calculator extends Component {
 
           {this.renderScreen()}
           </View>
+          
         </ScrollView>
         </SafeAreaView>
     );
@@ -294,6 +316,15 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondary,
     paddingTop: Platform.OS === 'android' ? 28 : 0
 },
+modalContainer:{
+  padding:theme.sizes.base*2,
+  borderTopLeftRadius:theme.sizes.base*2,
+  borderTopRightRadius:theme.sizes.base*2,
+  backgroundColor:"white",
+  marginTop:height/4,
+  borderColor:theme.colors.tertiary,
+  borderWidth:3
+}
 });
 
 export default Calculator;
