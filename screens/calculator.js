@@ -17,7 +17,6 @@ import { Lumpsum } from "../components/lumpsum";
 import { Emicalc } from "../components/emi";
 import { Insurance } from "../components/insurance";
 import { Tabcomponent } from "../components/tabs";
-import { BarChart } from "../components/barChart";
 import { Header } from "../components/header";
 const { width, height } = Dimensions.get('window');
 
@@ -34,12 +33,8 @@ class Calculator extends Component {
     retirementAge: 60,
     wealth:5000000,
     tenure:35,
-    futureReturn:false
   };
 
-  setFutureReturns=()=>{
-    this.setState({futureReturn : true});
-  }
 
   setMonthlyInvestment = (monthlyInvestment) => {
     this.setState({monthlyInvestment});
@@ -266,19 +261,7 @@ class Calculator extends Component {
     }
   }
 
-  renderFutureReturnModal(){
-    return (
-      <Modal
-        animationType="slide"
-        visible={this.state.futureReturn}
-        onRequestClose={()=>this.setState({futureReturn:false})}
-        transparent={true}>
-          <ScrollView style={styles.modalContainer}>
-            <Text>Calculations based on investment of Rs. 2000 at 12% return</Text>
-          </ScrollView>
-      </Modal>
-    )
-  }
+
 
   render() {
     const resultData = this.calculateResult();
