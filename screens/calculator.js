@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, Text, View } from "react-native";
+import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions} from "react-native";
 import { theme } from "../constants";
 
 import { PieChart } from "../components/chart";
@@ -17,8 +17,8 @@ import { Lumpsum } from "../components/lumpsum";
 import { Emicalc } from "../components/emi";
 import { Insurance } from "../components/insurance";
 import { Tabcomponent } from "../components/tabs";
-import { BarChart } from "../components/barChart";
 import { Header } from "../components/header";
+const { width, height } = Dimensions.get('window');
 
 class Calculator extends Component {
   state = {
@@ -32,8 +32,10 @@ class Calculator extends Component {
     expense: 10,
     retirementAge: 60,
     wealth:5000000,
-    tenure:35
+    tenure:35,
   };
+
+
   setMonthlyInvestment = (monthlyInvestment) => {
     this.setState({monthlyInvestment});
   }
@@ -259,6 +261,8 @@ class Calculator extends Component {
     }
   }
 
+
+
   render() {
     const resultData = this.calculateResult();
     return (
@@ -277,6 +281,7 @@ class Calculator extends Component {
 
           {this.renderScreen()}
           </View>
+          
         </ScrollView>
         </SafeAreaView>
     );
@@ -294,6 +299,15 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.secondary,
     paddingTop: Platform.OS === 'android' ? 28 : 0
 },
+modalContainer:{
+  padding:theme.sizes.base*2,
+  borderTopLeftRadius:theme.sizes.base*2,
+  borderTopRightRadius:theme.sizes.base*2,
+  backgroundColor:"white",
+  marginTop:height/4,
+  borderColor:theme.colors.tertiary,
+  borderWidth:3
+}
 });
 
 export default Calculator;
