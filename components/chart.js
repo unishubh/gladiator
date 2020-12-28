@@ -71,7 +71,7 @@ const PieChart = (props) => {
           innerRadius={50}
           radius={90}
           labels={({ datum }) =>
-            `${datum.x}\n \u20b9 ${ApproximateNumberInWords(datum.y.toFixed(0))}`
+            `${datum.x}\n \u20b9 ${datum.y.toFixed(0)<0?"-":""} ${ApproximateNumberInWords(Math.abs(datum.y.toFixed(0)))}`
           }
           style={{
             labels: {
@@ -88,7 +88,7 @@ const PieChart = (props) => {
           style={{ fontSize: 12, fontWeight: 'bold' }}
           x={width / 2}
           y={150}
-          text={`${label} \n \u20B9 ${ApproximateNumberInWords(res.toFixed(0))}`}
+          text={`${label} \n \u20B9 ${res.toFixed(0)<0?"+":" "} ${ApproximateNumberInWords(Math.abs(res.toFixed(0)))}`}
         />
       </Svg>
     </View>

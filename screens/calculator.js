@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions} from "react-native";
-import { theme } from "../constants";
+import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions,StatusBar} from "react-native";
+import { theme, config } from "../constants";
 
 import { PieChart } from "../components/chart";
 import {
@@ -22,8 +22,8 @@ const { width, height } = Dimensions.get('window');
 
 class Calculator extends Component {
   state = {
-    investment: 10000,
-    monthlyInvestment:1000,
+    investment: config.sliderMeasures.emi.minAmount,
+    monthlyInvestment:config.sliderMeasures.sip.minAmount,
     period: 2,
     returns: 6,
     active: "SIP",
@@ -31,10 +31,20 @@ class Calculator extends Component {
     age: 40,
     expense: 10,
     retirementAge: 60,
-    wealth:5000000,
+    wealth:config.sliderMeasures.wealth.minAmount,
     tenure:35,
+    inflationSwitch:false,
+    inflationRate:4,
+    lumpsum:config.sliderMeasures.lumpsum.minAmount
   };
 
+  setLumpsum=(lumpsum)=>{
+    this.setState({lumpsum});
+  }
+
+  setInflationSwitch=(inflationSwitch)=>{
+    this.setState({inflationSwitch});
+  }
 
   setMonthlyInvestment = (monthlyInvestment) => {
     this.setState({monthlyInvestment});
@@ -73,6 +83,10 @@ class Calculator extends Component {
     this.setState({ active });
   };
 
+  setInflationRate=(inflationRate)=>{
+    this.setState({inflationRate});
+  }
+
   calculateResult() {
     let activeTab = this.state.active;
     let result = 0;
@@ -86,7 +100,7 @@ class Calculator extends Component {
         result = calculateResult(
           this.state.monthlyInvestment.toFixed(0),
           12,
-          this.state.returns.toFixed(0),
+          this.state.returns.toFixed(0)-(this.state.inflationSwitch?this.state.inflationRate:0),
           this.state.period.toFixed(0)
         );
         result=isNaN(result) ? 0: result;
@@ -128,13 +142,13 @@ class Calculator extends Component {
         ];
 
         result = calculateLumpSum(
-          this.state.investment,
-          this.state.returns,
+          this.state.lumpsum,
+          this.state.returns-(this.state.inflationSwitch?this.state.inflationRate:0),
           this.state.period
         );
         result=isNaN(result) || !isFinite(result) ? 0: result;
-        graphicData[0]["y"] = result - this.state.investment;
-        graphicData[1]["y"] = this.state.investment!==0?this.state.investment:1;
+        graphicData[0]["y"] = result - this.state.lumpsum;
+        graphicData[1]["y"] = this.state.lumpsum!==0?this.state.lumpsum:1;
 
         return graphicData;
       }
@@ -195,6 +209,10 @@ class Calculator extends Component {
             setInvestment={this.setMonthlyInvestment}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
+            inflationSwitch={this.state.inflationSwitch}
+            setInflationSwitch={this.setInflationSwitch}
+            inflationRate={this.state.inflationRate}
+            setInflationRate={this.setInflationRate}
           />
         );
         break;
@@ -216,10 +234,10 @@ class Calculator extends Component {
         return (
           <Wealth
             investment={this.state.wealth}
-            period={this.state.tenure}
+            period={this.state.period}
             returns={this.state.returns}
             setInvestment={this.setWealth}
-            setPeriod={this.setTenure}
+            setPeriod={this.setPeriod}
             setReturn={this.setReturn}
           />
         );
@@ -227,12 +245,16 @@ class Calculator extends Component {
       case "Lumpsum":
         return (
           <Lumpsum
-            investment={this.state.investment}
+            investment={this.state.lumpsum}
             period={this.state.period}
             returns={this.state.returns}
-            setInvestment={this.setInvestment}
+            setInvestment={this.setLumpsum}
             setPeriod={this.setPeriod}
             setReturn={this.setReturn}
+            inflationSwitch={this.state.inflationSwitch}
+            setInflationSwitch={this.setInflationSwitch}
+            inflationRate={this.state.inflationRate}
+            setInflationRate={this.setInflationRate}
           />
         );
       case "EMI":
@@ -266,8 +288,10 @@ class Calculator extends Component {
   render() {
     const resultData = this.calculateResult();
     return (
-      <SafeAreaView style={styles.droidSafeArea}>
+
       <ScrollView style={{flex:1,backgroundColor:'white' }}>
+                      <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true}/>
+
       <Header text={this.state.active}></Header>
 
       <PieChart graphicData={resultData} active={this.state.active}></PieChart>
@@ -283,7 +307,6 @@ class Calculator extends Component {
           </View>
           
         </ScrollView>
-        </SafeAreaView>
     );
   }
 }
@@ -297,7 +320,7 @@ const styles = StyleSheet.create({
   droidSafeArea: {
     flex: 1,
     backgroundColor: theme.colors.secondary,
-    paddingTop: Platform.OS === 'android' ? 28 : 0
+    paddingTop: Platform.OS === 'android' ? 14 : 0
 },
 modalContainer:{
   padding:theme.sizes.base*2,

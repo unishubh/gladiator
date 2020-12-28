@@ -20,7 +20,8 @@ const Wealth = (props) => {
         max={config.sliderMeasures.wealth.maxAmount}
         value={props.investment}
         onChange={props.setInvestment}
-        step={config.sliderMeasures.wealth.getWealthStep(props.investment.toFixed(0))}
+        step={config.sliderMeasures.wealth.amountStep}
+
       />
       <SliderLabel
         value={props.period.toFixed(0)}

@@ -44,9 +44,10 @@ const ModalComp = (props) => {
               calculation={props.calculation}
             />
           </View>
-          <Text style={{ margin: 5,color:"gray",}}>
+          {props.inflationMode===false?
+          <Text style={{ margin: 5, color:"gray",}}>
           *Inflation was not considered while doing the calculations
-        </Text>
+        </Text>:null}
         </ScrollView>
         <TouchableOpacity style={styles.modalBtn} onPress={() => props.setFutureReturn()}>
           <Text style={styles.modalBtnText}>Got it!</Text>

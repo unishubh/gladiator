@@ -3,7 +3,7 @@ const sliderMeasures = {
     maxAmount: 200000000,
     minAmount: 5000000,
     amountStep: 1000000,
-    minPeriod: 5,
+    minPeriod: 1,
     maxPeriod: 50,
     periodStep: 1,
     minRoi: 1,
@@ -23,11 +23,12 @@ const sliderMeasures = {
       if (period <= periodFirstChange) return periodStepBeforeFirstChange;
       return periodStepAfterFirstChange;
     },
+    
   },
   sip: {
-    minAmount: 500,
+    minAmount: 1000,
     maxAmount: 200000,
-    amountStep: 100,
+    amountStep: 1000,
     minPeriod: 1,
     maxPeriod: 50,
     periodStep: 1,
@@ -41,20 +42,22 @@ const sliderMeasures = {
       if (amount < amountFirstChange) return amountStepbeforeFirstChange;
       return amountStepafterFirstChange;
     },
+    minInflationRate:1,
+    maxInflationRate:18,
   },
   lumpsum: {
-    minAmount: 50000,
+    minAmount: 100000,
     maxAmount: 50000000,
-    amountStep: 100,
+    amountStep: 100000,
     minPeriod: 1,
     maxPeriod: 50,
     periodStep: 1,
     minReturn: 1,
     maxReturn: 40,
-    roiStep: 1,
+    roiStep: 10000,
     getAmountStep: (amount) => {
-      const amountFirstChange = 100000;
-      const amountSecondChange = 2000000;
+      const amountFirstChange = 1000000;
+      const amountSecondChange = 5000000;
       const amountStepBeforeFirstChange = 50000;
       const amountStepAfterFirstChange = 100000;
       const amountStepAfterSecondChange = 500000;
@@ -67,7 +70,7 @@ const sliderMeasures = {
   emi: {
     minAmount: 100000,
     maxAmount: 50000000,
-    amountStep: 100,
+    amountStep: 100000,
     minPeriod: 1,
     maxPeriod: 50,
     periodStep: 1,
