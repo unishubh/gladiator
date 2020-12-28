@@ -6,9 +6,9 @@ import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
 import { ModalComp } from './modal';
 import {SwitchComp} from './switch';
-import { cond } from 'react-native-reanimated';
-const { width, height } = Dimensions.get('window');
 
+
+const { width, height } = Dimensions.get('window');
 
 const Lumpsum = (props) => {
   const [showModal, setShowModal] = useState(false);
@@ -101,6 +101,7 @@ const Lumpsum = (props) => {
         inflationMode={props.inflationSwitch}
         setFutureReturn={closeModal}
       />
+      
     </View>
   );
 };

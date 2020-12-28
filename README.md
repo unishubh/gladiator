@@ -1,7 +1,7 @@
 # Mutual fund calculator app
 
 
-<img alt="GitHub issues" src="https://img.shields.io/github/issues/source-aasf/gladiator"> <img alt="GitHub Hacktoberfest combined status" src="https://img.shields.io/github/hacktoberfest/2020/source-aasf/gladiator"> ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+<img alt="GitHub Hacktoberfest combined status" src="https://img.shields.io/github/hacktoberfest/2020/source-aasf/gladiator"> ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square) [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 <a href='https://play.google.com/store/apps/details?id=com.unishubh.gladiator&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height=200 width=400/></a>
 </br>
 Mutual fund calculator app is a tool to calculate all your financial targets. Developed in React Native using Expo, the app allows you to do four kinds of calculations.

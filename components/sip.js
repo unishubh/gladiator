@@ -113,6 +113,9 @@ const Sip = (props) => {
         rateValue={props.returns - (props.inflationSwitch ? props.inflationRate.toFixed(0) : 0)}
         futureReturn={showModal}
         inflationMode={props.inflationSwitch}
+        inputValue={props.investment}
+        rateValue={props.returns}
+        futureReturn={showModal}
         setFutureReturn={closeModal}
       />
     </View>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions,StatusBar} from "react-native";
-import { theme, config } from "../constants";
+import { StyleSheet, SafeAreaView, ScrollView, Text, View, Button, Modal, Dimensions} from "react-native";
+import { theme,config } from "../constants";
 
 import { PieChart } from "../components/chart";
 import {
@@ -290,7 +290,6 @@ class Calculator extends Component {
     return (
 
       <ScrollView style={{flex:1,backgroundColor:'white' }}>
-                      <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#00BCD4" translucent = {true}/>
 
       <Header text={this.state.active}></Header>
 
