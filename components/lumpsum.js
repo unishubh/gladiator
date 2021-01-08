@@ -5,6 +5,9 @@ import { config,theme } from '../constants';
 import { SliderLabel } from './SliderLabel';
 import { SliderComp } from './slider';
 import { ModalComp } from './modal';
+import {SwitchComp} from './switch';
+
+
 const { width, height } = Dimensions.get('window');
 
 const Lumpsum = (props) => {
@@ -13,12 +16,39 @@ const Lumpsum = (props) => {
   const closeModal = () => {
     setShowModal(false);
   };
+  const showInflationSlider=()=>{
+    if(props.inflationSwitch){
+      return(
+        <View>
+        <SliderLabel
+          value={props.inflationRate.toFixed(0)}
+          label="Expected Inflation Rate"
+          caption="%"
+          onChange={props.setInflationRate}
+          max={config.sliderMeasures.sip.maxInflationRate}
+        />
+        <SliderComp
+          min={config.sliderMeasures.sip.minInflationRate}
+          max={config.sliderMeasures.sip.maxInflationRate}
+          value={props.inflationRate}
+          onChange={props.setInflationRate}
+        />
+        </View>
+      )
+    }
+    
+    return null
+  }
   return (
     <View>
+      <SwitchComp
+          inflationMode={props.inflationSwitch}
+        setInflationMode={props.setInflationSwitch}
+        />
       <SliderLabel
         value={GetNumberWithCommas(props.investment.toFixed(0))}
         onChange={props.setInvestment}
-        label="Total One Tme Investment"
+        label="Total One Time Investment"
         max={config.sliderMeasures.lumpsum.maxAmount}
         caption="Rs."
       />
@@ -27,7 +57,8 @@ const Lumpsum = (props) => {
         max={config.sliderMeasures.lumpsum.maxAmount}
         value={props.investment}
         onChange={props.setInvestment}
-        step={config.sliderMeasures.lumpsum.getAmountStep(props.investment.toFixed(0))}
+        step={config.sliderMeasures.lumpsum.amountStep}
+        
       />
       <SliderLabel
         value={props.period.toFixed(0)}
@@ -55,18 +86,22 @@ const Lumpsum = (props) => {
         max={config.sliderMeasures.lumpsum.maxReturn}
         value={props.returns}
         onChange={props.setReturn}
-        step={config.sliderMeasures.lumpsum.roiStep}
+        step={1}
       />
+      {showInflationSlider()}
       <TouchableOpacity style={styles.modalBtn} onPress={() => setShowModal(true)}>
         <Text style={styles.modalBtnText}>Expected values for next 30 years</Text>
       </TouchableOpacity>
       <ModalComp
-        inputValue={props.investment}
-        rateValue={props.returns}
+        inputValue={props.investment.toFixed(0)}
+        rateValue={props.returns- (props.inflationSwitch ? props.inflationRate.toFixed(0) : 0)}
         futureReturn={showModal}
         setFutureReturn={closeModal}
         calculation="lumpsum"
+        inflationMode={props.inflationSwitch}
+        setFutureReturn={closeModal}
       />
+      
     </View>
   );
 };

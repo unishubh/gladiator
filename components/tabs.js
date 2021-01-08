@@ -26,7 +26,11 @@ handleTab = (tab, props) => {
 const Tabcomponent = (props) => {
   const tabs = ['SIP', 'Wealth', 'Lumpsum', 'EMI'];
 
-  return <View style={styles.tabs}>{tabs.map((tab) => renderTab(tab, props))}</View>;
+  return <View style={styles.tabs}>
+    
+    {tabs.map((tab) => renderTab(tab, props))}
+    </View>;
+
 };
 
 const styles = StyleSheet.create({

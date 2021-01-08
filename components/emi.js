@@ -19,8 +19,9 @@ const Emicalc = (props) => {
         min={config.sliderMeasures.emi.minAmount}
         max={config.sliderMeasures.emi.maxAmount}
         value={props.investment}
-        step={config.sliderMeasures.emi.getAmountStep(props.investment.toFixed(0))}
         onChange={props.setInvestment}
+        step={config.sliderMeasures.emi.amountStep}
+
       />
       <SliderLabel
         value={props.period.toFixed(0)}

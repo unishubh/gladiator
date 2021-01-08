@@ -7,6 +7,7 @@ import { SliderComp } from './slider';
 import Accordian from './accordian';
 import data from '../data/sip.json';
 import { ModalComp } from './modal';
+import {SwitchComp} from './switch'
 
 const { width, height } = Dimensions.get('window');
 
@@ -26,9 +27,37 @@ const Sip = (props) => {
     setShowModal(false);
   };
 
+  const showInflationSlider=()=>{
+    if(props.inflationSwitch){
+      return(
+        <View>
+        <SliderLabel
+          value={props.inflationRate.toFixed(0)}
+          label="Expected Inflation Rate"
+          caption="%"
+          onChange={props.setInflationRate}
+          max={config.sliderMeasures.sip.maxInflationRate}
+        />
+        <SliderComp
+          min={config.sliderMeasures.sip.minInflationRate}
+          max={config.sliderMeasures.sip.maxInflationRate}
+          value={props.inflationRate}
+          onChange={props.setInflationRate}
+        />
+        </View>
+      )
+    }
+    
+    return null
+  }
+
   return (
     <View>
       <View>
+        <SwitchComp
+          inflationMode={props.inflationSwitch}
+        setInflationMode={props.setInflationSwitch}
+        />
         <SliderLabel
           value={GetNumberWithCommas(props.investment.toFixed(0))}
           onChange={props.setInvestment}
@@ -37,11 +66,12 @@ const Sip = (props) => {
           max={config.sliderMeasures.sip.maxAmount}
         />
         <SliderComp
-          step={config.sliderMeasures.sip.getAmountStep(props.investment.toFixed(0))}
           min={config.sliderMeasures.sip.minAmount}
           max={config.sliderMeasures.sip.maxAmount}
           value={props.investment}
           onChange={props.setInvestment}
+          step={config.sliderMeasures.sip.amountStep}
+          showToolTip
         />
         <SliderLabel
           value={props.period.toFixed(0)}
@@ -71,12 +101,18 @@ const Sip = (props) => {
           value={props.returns}
           onChange={props.setReturn}
         />
+        {showInflationSlider()}
+
       </View>
       <TouchableOpacity style={styles.modalBtn} onPress={() => setShowModal(true)}>
         <Text style={styles.modalBtnText}>Expected values for next 30 years</Text>
       </TouchableOpacity>
 
       <ModalComp
+        inputValue={props.investment.toFixed(0)}
+        rateValue={props.returns - (props.inflationSwitch ? props.inflationRate.toFixed(0) : 0)}
+        futureReturn={showModal}
+        inflationMode={props.inflationSwitch}
         inputValue={props.investment}
         rateValue={props.returns}
         futureReturn={showModal}
